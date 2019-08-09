@@ -1,0 +1,80 @@
+baseURL = "/"
+languageCode = "en-us"
+title = "R 4 Humans"
+description = "Accessible R Tutorials for Ordinary Humans"
+theme = "min_night"
+disqusShortname = ""
+googleAnalytics = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "public/"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+#2f0154
+
+[params]
+    author = "Gabby Novak"
+    description = ""
+    logo = ""
+    twitterAuthor = ""
+    githubUsername = "ganovak"
+    accentColor = "#386890" # dark colors do best
+    backgroundColor = "#f5f5f5"
+    font = "Mina" # should match the name on Google Fonts!
+    highlight = true
+    highlightStyle = "Crimson Text" # make this match accent
+    highlightLanguages = ["r", "bash", "go"]
+
+# adjust these as you see fit
+[[menu.main]]
+    url = "/"
+    name = "Home"
+    weight = 1
+
+[[menu.main]]
+    url = "/post/"
+    name = "Quick Tasks"
+    weight = 2
+
+[[menu.main]]
+    url = "/project/"
+    name = "Learning"
+    weight = 3
+    
+[[menu.main]]
+    url = "/tags/"
+    name = "Topics"
+    weight = 4
+
+# Social icons to be shown on the right-hand side of the navigation bar
+# The "name" field should match the name of the icon to be used
+# The list of available icons can be found at http://fontawesome.io/icons/
+
+[[menu.icon]]
+    url = "mailto:gabriellanovak00@gmail.com"
+    name = "far fa-envelope"
+    weight = 1
+
+[[menu.icon]]
+    url = "https://ganovak.netlify.com/"
+    name = "fas fa-cloud"
+    weight = 2
+    
+[[menu.icon]]
+    url = "https://github.com/ganovak/"
+    name = "fab fa-github"
+    weight = 3
+
+#[[menu.icon]]
+#    url = "https://twitter.com/natedayta/"
+#    name = "fab fa-twitter"
+#    weight = 3
+
+#[[menu.icon]]
+#    url = "https://www.linkedin.com/in/nathan-day-59b48435/"
+#    name = "fab fa-linkedin"
+#    weight = 4
+
+#[[menu.icon]]
+#    url = "https://www.stackoverflow.com/users/5878751/nate"
+#    name = "fab fa-stack-overflow"
+#    weight = 5
