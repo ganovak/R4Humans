@@ -12,39 +12,13 @@
     
     
     <item>
-      <title>Project 1</title>
-      <link>/project/project1/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <title>Mapping with ggplot2</title>
+      <link>/project/test/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>/project/project1/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Project 2</title>
-      <link>/project/project2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project/project2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Project 3</title>
-      <link>/project/project3/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project/project3/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Project 4</title>
-      <link>/project/project4/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project/project4/</guid>
-      <description></description>
+      <guid>/project/test/</guid>
+      <description>Reading in Spatial ObjectsFrom tigiris filesThere are many packages that make sourcing shp files easier. We will focus on the tigris package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.
+library(tigris)tig&amp;lt;-states(year = 2017)head(tig@data)## REGION DIVISION STATEFP STATENS GEOID STUSPS NAME LSAD MTFCC## 0 3 5 54 01779805 54 WV West Virginia 00 G4000## 1 3 5 12 00294478 12 FL Florida 00 G4000## 2 2 3 17 01779784 17 IL Illinois 00 G4000## 3 2 4 27 00662849 27 MN Minnesota 00 G4000## 4 3 5 24 01714934 24 MD Maryland 00 G4000## 5 1 1 44 01219835 44 RI Rhode Island 00 G4000## FUNCSTAT ALAND AWATER INTPTLAT INTPTLON## 0 A 62265662566 489840834 +38.</description>
     </item>
     
     <item>
@@ -54,62 +28,6 @@
       
       <guid>/2019/08/09/using-latex-font-in-graphics/</guid>
       <description>When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don’t match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by ggplot::theme(text=element_text(family=&#34;serif&#34;)). If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/2015/07/23/hello-r-markdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
-    </item>
-    
-    <item>
-      <title>Creating a New Theme</title>
-      <link>/2014/09/28/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/2014/09/28/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
-We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/2014/04/02/hugo-template-primer/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/2014/04/02/hugo-template-primer/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with Hugo</title>
-      <link>/2014/04/02/getting-started-with-hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/2014/04/02/getting-started-with-hugo/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
-    </item>
-    
-    <item>
-      <title>Migrate from Jekyll</title>
-      <link>/2014/03/10/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/2014/03/10/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/ ▾ images/ logo.png  should become
-▾ &amp;lt;root&amp;gt;/ ▾ static/ ▾ images/ logo.png  Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
     </item>
     
   </channel>
