@@ -17,12 +17,12 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "public/"]
     logo = ""
     twitterAuthor = ""
     githubUsername = "ganovak"
-    accentColor = "#386890" # dark colors do best
+    accent = "#4A235A" # dark colors do best
     backgroundColor = "#f5f5f5"
-    font = "Mina" # should match the name on Google Fonts!
+    font = "Crimson Text" # should match the name on Google Fonts!
     highlight = true
-    highlightStyle = "Crimson Text" # make this match accent
-    highlightLanguages = ["r", "bash", "go"]
+    highlightStyle = "solarized-light" # make this match accent see https://highlightjs.org/static/demo/
+    highlightLanguages = ["r", "bash"]
 
 # adjust these as you see fit
 [[menu.main]]
