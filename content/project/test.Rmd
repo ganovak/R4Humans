@@ -1,0 +1,191 @@
+---
+title: "Mapping with ggplot2"
+author: "Gabby Novak"
+date: '2019-08-09'
+subtitle: "The Practical Bits"
+tags: ["ggplot2","tigris","Choropleths"]
+categories: ["Mapping"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=5, 
+                      fig.width=5,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/MappingWithggplot2"
+```
+
+# Reading in Spatial Objects
+
+## From tigiris files
+
+There are many packages that make sourcing shp files easier. We will focus on the `tigris` package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.
+
+```{r,results="hide"}
+library(tigris)
+tig<-states(year = 2017)
+```
+```{r}
+head(tig@data)
+```
+
+Note that this reads in an object of class Large SpatialPolygonsDataFrame. If you just run the variable name like you would other objects, you will get a lot of output that is not particularly helpful to you. In order to look at the data it contains as a data frame, you will have to look at what is called the data "slot", denoted by the @. It contains all the information needed to plot the map as well as identifiers and occassionally other data. `tig@data` works like a variable name and can be handled as such. 
+
+## From self-sourced mapping files
+
+Country borders and most maps of the US are easily sources through a package. For maps of international countries, you more than likely will have to import your own files. Many of these files can be found with a simple Google search. Usually, when you download the files, there will be several. I downloaded this folder from the US Census Bureau website.
+
+```{r}
+list.files(paste0(dir,"/tl_2017_us_state"))
+```
+
+The folder contains 8 files and a problem. There are 4 files with a .shp file extension. The ones that are not the pure .shp need to be deleted or moved. The following are the files needed for mapping.
+
+```{r}
+list.files(paste0(dir,"/MappingObjects"))
+```
+
+**Access the maps used in this demonstration [here]("https://github.com/ganovak/R4Humans-AuxFiles/tree/master/MappingWithggplot2")**
+
+A note on rdgal. This is the package I use to read in mapping files. Thing is, it be can be persnickety. When you library it, several lines into the load message is a section which says "GDAL binary built with GEOS:". For rgdal to work properly, this needs to be "TRUE". If it is not, you will need to run `install.packages("gdalUtils")` and then re-install rgdal. Now, when you library rgdal, the binary should be TRUE. 
+
+```{r}
+library(rgdal)
+shp<-readOGR(dsn=paste0(dir,"/MappingObjects"),layer="tl_2017_us_state")
+head(shp@data)
+```
+
+The code above reads in the file. The `dsn` argument is the folder that contains the mapping files and `layer` is the file name without the extension (they should be be sure that all your mapping files have the same name).
+
+As you can see from the data, I have read in the same map twice. This is for illustrative purposes only, you only need one. I will arbitarily continue with the tigris file.
+
+# Plotting Base Maps
+
+To start, I will plot an unaltered map.
+
+```{r}
+library(ggplot2)
+tigmap<-fortify(tig,region="NAME")
+head(tigmap)
+```
+
+`fortify()` converts a Large SpatialPolygonsDataFrame into a plain dataframe `ggplot2` can plot. The `region` argument is required and is the variable in the Large SpatialPolygonsDataFrame that defines the areas bounded in the map. In this case, it is the variable that names the states.
+
+```{r}
+tigmap<-tigmap[order(tigmap$order),]
+```
+
+This line of code reorders the dataframe to ensure that the areas are plotted in the correct order. It is absolutely essential to avoid tearing the polygons. As we will see later, it will need to be rerun any time the mapping dataframe is altered.
+
+```{r}
+ggplot()+
+  geom_polygon(data=tigmap,
+               aes(x=long,y=lat,group=group),
+               color="black",fill="white")+
+  coord_fixed(1.2)
+```
+
+# Subsetting Mapping Data
+
+Turns out, the file contains Alaska, Hawaii, and several US territories along with the contiguous US.
+
+```{r}
+unique(tigmap$id)
+```
+
+The file actually contains 56 seperate regions. We only want to map the 48 contiguous states and Washington DC. To do this, we will subset the data to exclude the information that we do not want to map. 
+
+```{r}
+rm.areas<-unique(tigmap$id)[c(2,3,8,14,15,43,49)]
+tigmap<-tigmap[!tigmap$id %in% rm.areas,]
+```
+
+There are multiple ways to do this. I have provided the `base R` code. It can also be done easily in `tidyverse` if that is your grammar of choice. Remember that because we ran `fortify`, `tigmap` is just a data frame so all the usual subsetting methods are valid. Because I had already run that list of the areas in the map and it printed so nicely with indices, I chose to subset by index. Keep in mind that although many a computer programmer thinks they deserve an appology for this, `R` is 1 indexed. 
+
+```{r}
+ggplot()+
+  geom_polygon(data=tigmap,
+               aes(x=long,y=lat,group=group),
+               color="black",fill="white")+
+  coord_fixed(1.2)
+```
+
+The reprinted map looks much nicer and its extents are automagically altered to frame the map correctly.
+
+# Making Choropleths
+
+## Simulating Data
+
+```{r}
+set.seed(07122019)
+data<-data.frame(id=unique(tigmap$id),
+           val1=sample(1:1000,length(unique(tigmap$id)),replace=T))
+head(data)
+```
+
+I have created a data frame of random values to plot on the map. The `set.seed` function gives the random generation a starting point. If you choose to run this code, you will have the same random numbers, and thus the same map as those created here. It is very important that the regional identifier in your data (in this case the state name), is called "id" so it can be joined into the fortified mapping object. 
+
+## Merging Data with Mapping Objects
+
+In order to map data, we need it to all be in the same data frame. 
+
+```{r}
+choro<-merge(x=tigmap,y=data,by="id")
+```
+
+The `x` argument is the mapping object, `y` is a data frame. There is now a `val1` column to be mapped.
+
+## Mapping Continuous Variables
+
+```{r}
+ggplot()+
+  geom_polygon(data=choro,
+               aes(x=long,y=lat,group=group, fill=val1),
+               color="black")+
+  coord_fixed(1.2)
+```
+
+The only change we make here is that instead of manually specifying the fill color, we place it inside the `aes()` statement and map it to the values in `val1`. For more information on altering the look of this map, check out the Aestetic Bits portion of this tutorial.
+
+## Mapping Discrete Variables
+
+When mapping numeric values, R automatically assumes that they are continuous. Additional code must be run during mapping in order to treat it like a discrete variable. By this method, the data itself is not altered.
+
+```{r}
+ggplot()+
+  geom_polygon(data=choro,
+               aes(x=long,y=lat,group=group, 
+                   fill=cut(val1,
+                            breaks=c(0,100,200,300,400,500,
+                                     600,700,800,900,1000))),
+               color="black")+
+  coord_fixed(1.2)+
+  labs(fill="val1")
+```
+
+`cut()` cuts a continuous variable into a discrete one. I have chosed to rename the legend (with `labs(fill=)`) because otherwise it inherits the entire `cut()` function call and messes up the graphic sizing. A few things to be careful of when using `cut()`:
+
+1) Keep in mind the range of your values. If there is data outside of the bounds of passed to `cut()` it will not be plotted correctly.
+
+2) Notice that the first value of the first color block in exclusive, meaning if we were to have any `val1==0` (we do not), it would not be included in this, or any other grouping. This can be remedied by assuring that the first break passed to `cut()` is lower than your minimum value (if zero is included in the data, a negetive number can be used). The labels in the legend can be altered later by `scale_fill_discrete()` or other functions depending on color scheme (see Aestetic Bits for more information about color scales).
+
+## Mapping Non-numeric Variables
+
+```{r}
+data$val2<-sample(c("a","b","c"),length(data$val1),replace=T)
+```
+
+Here I add a categorical variable to our data frame. It will be merged and plotted just like a numeric variable. 
+
+```{r}
+choro2<-merge(x=tigmap,y=data,by="id")
+ggplot()+
+  geom_polygon(data=choro2,
+               aes(x=long,y=lat,group=group, 
+                   fill=val2),
+               color="black")+
+  coord_fixed(1.2)
+```
