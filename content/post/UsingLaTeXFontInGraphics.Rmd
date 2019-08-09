@@ -1,0 +1,87 @@
+---
+title: "Using LaTeX Font in Graphics"
+author: "Gabby Novak"
+date: 2019-08-09
+categories: ["Graphics"]
+tags: ["ggplot2", "Base R", "LaTeX"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=3, 
+                      fig.width=3,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+```
+
+When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don't match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by `ggplot::theme(text=element_text(family="serif"))`. If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font. For those more knowledgable in LaTeX, changing the font used in the output is a viable alternative. However, this tutorial will go over using Computer Modern in R graphics.
+
+# Initial Install
+
+1) Download **TTF** Latin Modern fonts [here](https://www.fontsquirrel.com/fonts/latin-modern-roman). Navigate to the Webfont Kit tab. Select no subsetting and the TTF format (choosing the correct format is essential).
+
+2) Install the fonts. This step will differ slightly depending on your operating system and machine configuration but the basic idea is that you must go through the files you've just downloaded and find the actual TTF files (there are many auxillery folders and files) and install them. There will be an individual TTF file for all sets of the font (*e.g.* bold, itallics, caps, etc). At this point, the font is availible for use by your machine.
+
+3) Import the font into R. To do this you will need the extrafont package. The pattern argument will change according to the file name for the fonts. Using the * symbol assures that all sets are imported for use.
+
+```{r,eval=FALSE}
+install.packages("extrafont")
+library(extrafont)
+font_import(pattern = "lmroman*")
+```
+
+# Regular Use
+
+Once the initial install is complete, in order to use the font in graphics, you will need to library the `extrafont` package regardless of how the graphics will be produced. 
+
+```{r, results='hide'}
+library(extrafont)
+```
+
+## Data used in demonstration
+
+```{r}
+set.seed(1226)
+data<-data.frame(x=sample(1:100,20,replace=T),
+                 y=sample(1:100,200,replace=T))
+```
+
+## In base graphics
+
+### Default font:
+
+```{r}
+plot(data$x,data$y)
+```
+
+### Computer modern:
+
+```{r}
+par(family = "LM Roman 10")
+plot(data$x,data$y)
+```
+
+All plots that follow the `par()` statement will have the computer modern font.
+
+## In ggplot graphics
+
+### Default font:
+
+```{r, results='hide'}
+library(ggplot2)
+```
+
+```{r}
+ggplot(data,aes(x,y))+
+  geom_point()
+```
+
+### Computer modern:
+
+```{r}
+ggplot(data,aes(x,y))+
+  geom_point()+
+  theme(text=element_text(family="LM Roman 10"))
+```

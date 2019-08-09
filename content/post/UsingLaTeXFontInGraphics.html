@@ -1,0 +1,65 @@
+---
+title: "Using LaTeX Font in Graphics"
+author: "Gabby Novak"
+date: 2019-08-09
+categories: ["Graphics"]
+tags: ["ggplot2", "Base R", "LaTeX"]
+---
+
+
+
+<p>When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don’t match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by <code>ggplot::theme(text=element_text(family="serif"))</code>. If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font. For those more knowledgable in LaTeX, changing the font used in the output is a viable alternative. However, this tutorial will go over using Computer Modern in R graphics.</p>
+<div id="initial-install" class="section level1">
+<h1>Initial Install</h1>
+<ol style="list-style-type: decimal">
+<li><p>Download <strong>TTF</strong> Latin Modern fonts <a href="https://www.fontsquirrel.com/fonts/latin-modern-roman">here</a>. Navigate to the Webfont Kit tab. Select no subsetting and the TTF format (choosing the correct format is essential).</p></li>
+<li><p>Install the fonts. This step will differ slightly depending on your operating system and machine configuration but the basic idea is that you must go through the files you’ve just downloaded and find the actual TTF files (there are many auxillery folders and files) and install them. There will be an individual TTF file for all sets of the font (<em>e.g.</em> bold, itallics, caps, etc). At this point, the font is availible for use by your machine.</p></li>
+<li><p>Import the font into R. To do this you will need the extrafont package. The pattern argument will change according to the file name for the fonts. Using the * symbol assures that all sets are imported for use.</p></li>
+</ol>
+<pre class="r"><code>install.packages(&quot;extrafont&quot;)
+library(extrafont)
+font_import(pattern = &quot;lmroman*&quot;)</code></pre>
+</div>
+<div id="regular-use" class="section level1">
+<h1>Regular Use</h1>
+<p>Once the initial install is complete, in order to use the font in graphics, you will need to library the <code>extrafont</code> package regardless of how the graphics will be produced.</p>
+<pre class="r"><code>library(extrafont)</code></pre>
+<div id="data-used-in-demonstration" class="section level2">
+<h2>Data used in demonstration</h2>
+<pre class="r"><code>set.seed(1226)
+data&lt;-data.frame(x=sample(1:100,20,replace=T),
+                 y=sample(1:100,200,replace=T))</code></pre>
+</div>
+<div id="in-base-graphics" class="section level2">
+<h2>In base graphics</h2>
+<div id="default-font" class="section level3">
+<h3>Default font:</h3>
+<pre class="r"><code>plot(data$x,data$y)</code></pre>
+<p><img src="/post/UsingLaTeXFontInGraphics_files/figure-html/unnamed-chunk-4-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+<div id="computer-modern" class="section level3">
+<h3>Computer modern:</h3>
+<pre class="r"><code>par(family = &quot;LM Roman 10&quot;)
+plot(data$x,data$y)</code></pre>
+<p><img src="/post/UsingLaTeXFontInGraphics_files/figure-html/unnamed-chunk-5-1.png" width="288" style="display: block; margin: auto;" /></p>
+<p>All plots that follow the <code>par()</code> statement will have the computer modern font.</p>
+</div>
+</div>
+<div id="in-ggplot-graphics" class="section level2">
+<h2>In ggplot graphics</h2>
+<div id="default-font-1" class="section level3">
+<h3>Default font:</h3>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<pre class="r"><code>ggplot(data,aes(x,y))+
+  geom_point()</code></pre>
+<p><img src="/post/UsingLaTeXFontInGraphics_files/figure-html/unnamed-chunk-7-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+<div id="computer-modern-1" class="section level3">
+<h3>Computer modern:</h3>
+<pre class="r"><code>ggplot(data,aes(x,y))+
+  geom_point()+
+  theme(text=element_text(family=&quot;LM Roman 10&quot;))</code></pre>
+<p><img src="/post/UsingLaTeXFontInGraphics_files/figure-html/unnamed-chunk-8-1.png" width="288" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
