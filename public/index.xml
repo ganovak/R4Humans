@@ -6,7 +6,7 @@
     <description>Recent content on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Jul 2015 21:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 09 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
@@ -45,6 +45,15 @@
       
       <guid>/project/project4/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Using LaTeX Font in Graphics</title>
+      <link>/2019/08/09/using-latex-font-in-graphics/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/09/using-latex-font-in-graphics/</guid>
+      <description>When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don’t match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by ggplot::theme(text=element_text(family=&#34;serif&#34;)). If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font.</description>
     </item>
     
     <item>
