@@ -1,0 +1,56 @@
+---
+title: "Multi-Line Text in ggplot2 Graphics"
+author: "Gabby Novak"
+date: 2019-08-14
+categories: ["Graphics"]
+tags: ["ggplot2"]
+---
+
+
+
+<p>In terms of labeling, ggplot2 provides a lot of options. However, the default is to put this text in a single line, regardless of length. This can do real strange things to spacing within the figure. Shortening labels is not always an option, so here we will explore the available labels for ggplot figures and how to force multi-lines.</p>
+<div id="available-labels" class="section level1">
+<h1>Available labels</h1>
+<pre class="r"><code># simulating data
+set.seed(08142019)
+data&lt;-data.frame(x=sample(1:100,100),
+                 y=sample(1:100,100),
+                 cat1=sample(c(&quot;group 1&quot;,&quot;group 2&quot;),100,replace=T),
+                 cat2=sample(c(&quot;type 1&quot;,&quot;type 2&quot;),100,replace=T))
+
+# plot without label specifcation
+library(ggplot2)
+plot1&lt;-ggplot(data,aes(x,y,shape=cat1,color=cat2))+
+  geom_point()
+plot1</code></pre>
+<p><img src="/post/MultiLineTextInggplot2_files/figure-html/unnamed-chunk-1-1.png" width="384" style="display: block; margin: auto;" /></p>
+<p>If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends. By default there is no title.</p>
+<pre class="r"><code># label specification
+plot1+
+  labs(title = &quot;title&quot;,
+       subtitle = &quot;subtitle&quot;,
+       caption = &quot;caption&quot;,
+       tag= &quot;tag&quot;,
+       x = &quot;x axis&quot;,
+       y = &quot;y axis&quot;,
+       shape = &quot;shape&quot;,
+       color = &quot;color&quot;)</code></pre>
+<p><img src="/post/MultiLineTextInggplot2_files/figure-html/unnamed-chunk-2-1.png" width="384" style="display: block; margin: auto;" /></p>
+</div>
+<div id="multi-line-text" class="section level1">
+<h1>Multi-Line Text</h1>
+<p>Forcing mutli-line labels in ggplots is as simple as two keystrokes. Those familiar with LaTeX will recognize “” as the standard call for a line break. Inserting this command into the quoted text will produce a line break at its location.</p>
+<pre class="r"><code>plot1+
+  labs(title = &quot;title: \n descriptive name for the graph \n multi-line usually omitted in favor of subtitle&quot;,
+       subtitle = &quot;subtitle: \n  additional information about contents of graph&quot;,
+       caption = &quot;caption \n usually cites source data&quot;,
+       # depending on arrangement function of choice, may be omitted
+       tag= &quot;tag \n label for \n multi-figure \n arrangements&quot;, 
+       x = &quot;x axis \n variable description&quot;,
+       y = &quot;y axis \n variable description&quot;,
+       # mapped variables are specified by the aestetic they are mapped to
+       shape = &quot;shape \n description of mapped variable&quot;,
+       color = &quot;color \n description of mapped variable&quot;)</code></pre>
+<p><img src="/post/MultiLineTextInggplot2_files/figure-html/unnamed-chunk-3-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>Note that all labels here are used with their default parameters (including size, face, font, position, <em>etc.</em>). These can all be altered in <code>theme()</code>.</p>
+</div>

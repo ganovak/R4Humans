@@ -1,0 +1,72 @@
+---
+title: "Multi-Line Text in ggplot2 Graphics"
+author: "Gabby Novak"
+date: 2019-08-14
+categories: ["Graphics"]
+tags: ["ggplot2"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=3, 
+                      fig.width=4,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+```
+
+In terms of labeling, ggplot2 provides a lot of options. However, the default is to put this text in a single line, regardless of length. This can do real strange things to spacing within the figure. Shortening labels is not always an option, so here we will explore the available labels for ggplot figures and how to force multi-lines.
+
+# Available labels
+
+```{r}
+# simulating data
+set.seed(08142019)
+data<-data.frame(x=sample(1:100,100),
+                 y=sample(1:100,100),
+                 cat1=sample(c("group 1","group 2"),100,replace=T),
+                 cat2=sample(c("type 1","type 2"),100,replace=T))
+
+# plot without label specifcation
+library(ggplot2)
+plot1<-ggplot(data,aes(x,y,shape=cat1,color=cat2))+
+  geom_point()
+plot1
+```
+
+If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends. By default there is no title.
+
+```{r}
+# label specification
+plot1+
+  labs(title = "title",
+       subtitle = "subtitle",
+       caption = "caption",
+       tag= "tag",
+       x = "x axis",
+       y = "y axis",
+       shape = "shape",
+       color = "color")
+```
+
+# Multi-Line Text
+
+Forcing mutli-line labels in ggplots is as simple as two keystrokes. Those familiar with LaTeX will recognize "\n" as the standard call for a line break. Inserting this command into the quoted text will produce a line break at its location. 
+
+```{r, fig.height=8,fig.width=8}
+plot1+
+  labs(title = "title: \n descriptive name for the graph \n multi-line usually omitted in favor of subtitle",
+       subtitle = "subtitle: \n  additional information about contents of graph",
+       caption = "caption \n usually cites source data",
+       # depending on arrangement function of choice, may be omitted
+       tag= "tag \n label for \n multi-figure \n arrangements", 
+       x = "x axis \n variable description",
+       y = "y axis \n variable description",
+       # mapped variables are specified by the aestetic they are mapped to
+       shape = "shape \n description of mapped variable",
+       color = "color \n description of mapped variable")
+```
+
+
+Note that all labels here are used with their default parameters (including size, face, font, position, *etc.*). These can all be altered in `theme()`.
