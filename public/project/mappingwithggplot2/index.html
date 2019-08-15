@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mapping with ggplot2</title>
+        <style>
+
+    html body {
+        font-family: 'Crimson Text', sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    :root {
+        --accent: #4A235A;
+        --border-width:  0 ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson%20Text">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+    
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+
+
+<script>
+$(document).ready(function(){
+    
+  var input = $('#night-mode-toggle');
+  var container = $('#bigbody');
+  var stat = $('#button-status');
+  
+  container.toggleClass(localStorage.toggled);
+  stat.bootstrapToggle(localStorage.button).change();
+  
+  input.on('click', function() {
+      if (localStorage.toggled != "-nightmode" ) {
+          container.toggleClass("-nightmode", true );
+          localStorage.toggled = "-nightmode";
+          localStorage.button = "on";
+       } else {
+          container.toggleClass("-nightmode", false );
+          localStorage.toggled = "";
+          localStorage.button = "off"
+       }
+  })
+});
+</script>
+ <meta name="generator" content="Hugo 0.56.3" />
+        
+        
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#000000">
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    
+    
+    <meta property="og:title" content="Mapping with ggplot2">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="/" >
+      
+    <meta property="description" content="">
+    <meta property="og:description" content="">
+    
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:site" content="">
+    
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body id = "bigbody">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand visible-xs" href="#">Mapping with ggplot2</a>
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Quick Tasks</a></li>
+                            
+                                <li><a href="/project/">Learning</a></li>
+                            
+                                <li><a href="/tags/">Topics</a></li>
+                            
+                        </ul>
+                    
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:gabriellanovak00@gmail.com"><i class="far fa-envelope"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://ganovak.netlify.com/"><i class="fas fa-cloud"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/ganovak/"><i class="fab fa-github"></i></a></li>
+                            
+                            <li id="night-mode-toggle">
+    <input type="checkbox" id = "button-status"
+        data-toggle="toggle"
+        data-width = "10"
+        data-height = "1"
+        data-on="<i class='far fa-moon fa-lg'></i>"
+        data-off= "<i class='far fa-sun fa-lg'></i>"
+        data-style="ios"
+        data-onstyle = "default">
+</li>
+                        </ul>
+                    
+                </div>
+            </div>
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/project/mappingwithggplot2/">Mapping with ggplot2</a></h4>
+    <h5>August 9, 2019 - 9 minutes</h5>
+    <h5></h5>
+
+    
+
+        <a href="/categories/mapping">
+        <kbd class="item-cat"> Mapping </kbd>
+    </a>
+    
+    
+    <a href="/tags/ggplot2">
+        <kbd class="item-tag"> ggplot2 </kbd>
+    </a>
+    
+    <a href="/tags/tigris">
+        <kbd class="item-tag"> tigris </kbd>
+    </a>
+    
+    <a href="/tags/choropleths">
+        <kbd class="item-tag"> Choropleths </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+
+<div id="reading-in-spatial-objects" class="section level1">
+<h1>Reading in Spatial Objects</h1>
+<div id="from-tigiris-files" class="section level2">
+<h2>From tigiris files</h2>
+<p>There are many packages that make sourcing shp files easier. We will focus on the <code>tigris</code> package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.</p>
+<pre class="r"><code>library(tigris)
+tig&lt;-states(year = 2017)</code></pre>
+<pre class="r"><code>head(tig@data)
+##   REGION DIVISION STATEFP  STATENS GEOID STUSPS          NAME LSAD MTFCC
+## 0      3        5      54 01779805    54     WV West Virginia   00 G4000
+## 1      3        5      12 00294478    12     FL       Florida   00 G4000
+## 2      2        3      17 01779784    17     IL      Illinois   00 G4000
+## 3      2        4      27 00662849    27     MN     Minnesota   00 G4000
+## 4      3        5      24 01714934    24     MD      Maryland   00 G4000
+## 5      1        1      44 01219835    44     RI  Rhode Island   00 G4000
+##   FUNCSTAT        ALAND      AWATER    INTPTLAT     INTPTLON
+## 0        A  62265662566   489840834 +38.6472854 -080.6183274
+## 1        A 138911437206 31398800291 +28.4574302 -082.4091478
+## 2        A 143784114293  6211277447 +40.1028754 -089.1526108
+## 3        A 206229176104 18944967530 +46.3158148 -094.1996628
+## 4        A  25150696145  6980371026 +38.9466584 -076.6744939
+## 5        A   2677997539  1323452846 +41.5974187 -071.5272723</code></pre>
+<p>Note that this reads in an object of class Large SpatialPolygonsDataFrame. If you just run the variable name like you would other objects, you will get a lot of output that is not particularly helpful to you. In order to look at the data it contains as a data frame, you will have to look at what is called the data “slot”, denoted by the @. It contains all the information needed to plot the map as well as identifiers and occassionally other data. <code>tig@data</code> works like a variable name and can be handled as such.</p>
+</div>
+<div id="from-self-sourced-mapping-files" class="section level2">
+<h2>From self-sourced mapping files</h2>
+<p>Country borders and most maps of the US are easily sources through a package. For maps of international countries, you more than likely will have to import your own files. Many of these files can be found with a simple Google search. Usually, when you download the files, there will be several. I downloaded this folder from the US Census Bureau website.</p>
+<pre class="r"><code>list.files(paste0(dir,&quot;/tl_2017_us_state&quot;))
+## [1] &quot;tl_2017_us_state.cpg&quot;            &quot;tl_2017_us_state.dbf&quot;           
+## [3] &quot;tl_2017_us_state.prj&quot;            &quot;tl_2017_us_state.shp&quot;           
+## [5] &quot;tl_2017_us_state.shp.ea.iso.xml&quot; &quot;tl_2017_us_state.shp.iso.xml&quot;   
+## [7] &quot;tl_2017_us_state.shp.xml&quot;        &quot;tl_2017_us_state.shx&quot;</code></pre>
+<p>The folder contains 8 files and a problem. There are 4 files with a .shp file extension. The ones that are not the pure .shp need to be deleted or moved. The following are the files needed for mapping.</p>
+<pre class="r"><code>list.files(paste0(dir,&quot;/MappingObjects&quot;))
+## [1] &quot;tl_2017_us_state.dbf&quot; &quot;tl_2017_us_state.prj&quot; &quot;tl_2017_us_state.shp&quot;
+## [4] &quot;tl_2017_us_state.shx&quot;</code></pre>
+<p><strong>Access the maps used in this demonstration <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/tree/master/MappingWithggplot2%22">here</a></strong></p>
+<p>A note on rdgal. This is the package I use to read in mapping files. Thing is, it be can be persnickety. When you library it, several lines into the load message is a section which says “GDAL binary built with GEOS:”. For rgdal to work properly, this needs to be “TRUE”. If it is not, you will need to run <code>install.packages("gdalUtils")</code> and then re-install rgdal. Now, when you library rgdal, the binary should be TRUE.</p>
+<pre class="r"><code>library(rgdal)
+shp&lt;-readOGR(dsn=paste0(dir,&quot;/MappingObjects&quot;),layer=&quot;tl_2017_us_state&quot;)
+## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Users\gabri\Documents\R\R4Humans-AuxFiles\MappingWithggplot2\MappingObjects&quot;, layer: &quot;tl_2017_us_state&quot;
+## with 56 features
+## It has 14 fields
+## Integer64 fields read as strings:  ALAND AWATER
+head(shp@data)
+##   REGION DIVISION STATEFP  STATENS GEOID STUSPS          NAME LSAD MTFCC
+## 0      3        5      54 01779805    54     WV West Virginia   00 G4000
+## 1      3        5      12 00294478    12     FL       Florida   00 G4000
+## 2      2        3      17 01779784    17     IL      Illinois   00 G4000
+## 3      2        4      27 00662849    27     MN     Minnesota   00 G4000
+## 4      3        5      24 01714934    24     MD      Maryland   00 G4000
+## 5      1        1      44 01219835    44     RI  Rhode Island   00 G4000
+##   FUNCSTAT        ALAND      AWATER    INTPTLAT     INTPTLON
+## 0        A  62265662566   489840834 +38.6472854 -080.6183274
+## 1        A 138911437206 31398800291 +28.4574302 -082.4091478
+## 2        A 143784114293  6211277447 +40.1028754 -089.1526108
+## 3        A 206229176104 18944967530 +46.3158148 -094.1996628
+## 4        A  25150696145  6980371026 +38.9466584 -076.6744939
+## 5        A   2677997539  1323452846 +41.5974187 -071.5272723</code></pre>
+<p>The code above reads in the file. The <code>dsn</code> argument is the folder that contains the mapping files and <code>layer</code> is the file name without the extension (they should be be sure that all your mapping files have the same name).</p>
+<p>As you can see from the data, I have read in the same map twice. This is for illustrative purposes only, you only need one. I will arbitarily continue with the tigris file.</p>
+</div>
+</div>
+<div id="plotting-base-maps" class="section level1">
+<h1>Plotting Base Maps</h1>
+<p>To start, I will plot an unaltered map.</p>
+<pre class="r"><code>library(ggplot2)
+tigmap&lt;-fortify(tig,region=&quot;NAME&quot;)
+head(tigmap)
+##        long      lat order  hole piece      id     group
+## 1 -88.13999 34.58170     1 FALSE     1 Alabama Alabama.1
+## 2 -88.13997 34.58184     2 FALSE     1 Alabama Alabama.1
+## 3 -88.13995 34.58202     3 FALSE     1 Alabama Alabama.1
+## 4 -88.13916 34.58767     4 FALSE     1 Alabama Alabama.1
+## 5 -88.13905 34.58825     5 FALSE     1 Alabama Alabama.1
+## 6 -88.13902 34.58855     6 FALSE     1 Alabama Alabama.1</code></pre>
+<p><code>fortify()</code> converts a Large SpatialPolygonsDataFrame into a plain dataframe <code>ggplot2</code> can plot. The <code>region</code> argument is required and is the variable in the Large SpatialPolygonsDataFrame that defines the areas bounded in the map. In this case, it is the variable that names the states.</p>
+<pre class="r"><code>tigmap&lt;-tigmap[order(tigmap$order),]</code></pre>
+<p>This line of code reorders the dataframe to ensure that the areas are plotted in the correct order. It is absolutely essential to avoid tearing the polygons. As we will see later, it will need to be rerun any time the mapping dataframe is altered.</p>
+<pre class="r"><code>ggplot()+
+  geom_polygon(data=tigmap,
+               aes(x=long,y=lat,group=group),
+               color=&quot;black&quot;,fill=&quot;white&quot;)+
+  coord_fixed(1.2)</code></pre>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="subsetting-mapping-data" class="section level1">
+<h1>Subsetting Mapping Data</h1>
+<p>Turns out, the file contains Alaska, Hawaii, and several US territories along with the contiguous US.</p>
+<pre class="r"><code>unique(tigmap$id)
+##  [1] &quot;Alabama&quot;                                     
+##  [2] &quot;Alaska&quot;                                      
+##  [3] &quot;American Samoa&quot;                              
+##  [4] &quot;Arizona&quot;                                     
+##  [5] &quot;Arkansas&quot;                                    
+##  [6] &quot;California&quot;                                  
+##  [7] &quot;Colorado&quot;                                    
+##  [8] &quot;Commonwealth of the Northern Mariana Islands&quot;
+##  [9] &quot;Connecticut&quot;                                 
+## [10] &quot;Delaware&quot;                                    
+## [11] &quot;District of Columbia&quot;                        
+## [12] &quot;Florida&quot;                                     
+## [13] &quot;Georgia&quot;                                     
+## [14] &quot;Guam&quot;                                        
+## [15] &quot;Hawaii&quot;                                      
+## [16] &quot;Idaho&quot;                                       
+## [17] &quot;Illinois&quot;                                    
+## [18] &quot;Indiana&quot;                                     
+## [19] &quot;Iowa&quot;                                        
+## [20] &quot;Kansas&quot;                                      
+## [21] &quot;Kentucky&quot;                                    
+## [22] &quot;Louisiana&quot;                                   
+## [23] &quot;Maine&quot;                                       
+## [24] &quot;Maryland&quot;                                    
+## [25] &quot;Massachusetts&quot;                               
+## [26] &quot;Michigan&quot;                                    
+## [27] &quot;Minnesota&quot;                                   
+## [28] &quot;Mississippi&quot;                                 
+## [29] &quot;Missouri&quot;                                    
+## [30] &quot;Montana&quot;                                     
+## [31] &quot;Nebraska&quot;                                    
+## [32] &quot;Nevada&quot;                                      
+## [33] &quot;New Hampshire&quot;                               
+## [34] &quot;New Jersey&quot;                                  
+## [35] &quot;New Mexico&quot;                                  
+## [36] &quot;New York&quot;                                    
+## [37] &quot;North Carolina&quot;                              
+## [38] &quot;North Dakota&quot;                                
+## [39] &quot;Ohio&quot;                                        
+## [40] &quot;Oklahoma&quot;                                    
+## [41] &quot;Oregon&quot;                                      
+## [42] &quot;Pennsylvania&quot;                                
+## [43] &quot;Puerto Rico&quot;                                 
+## [44] &quot;Rhode Island&quot;                                
+## [45] &quot;South Carolina&quot;                              
+## [46] &quot;South Dakota&quot;                                
+## [47] &quot;Tennessee&quot;                                   
+## [48] &quot;Texas&quot;                                       
+## [49] &quot;United States Virgin Islands&quot;                
+## [50] &quot;Utah&quot;                                        
+## [51] &quot;Vermont&quot;                                     
+## [52] &quot;Virginia&quot;                                    
+## [53] &quot;Washington&quot;                                  
+## [54] &quot;West Virginia&quot;                               
+## [55] &quot;Wisconsin&quot;                                   
+## [56] &quot;Wyoming&quot;</code></pre>
+<p>The file actually contains 56 seperate regions. We only want to map the 48 contiguous states and Washington DC. To do this, we will subset the data to exclude the information that we do not want to map.</p>
+<pre class="r"><code>rm.areas&lt;-unique(tigmap$id)[c(2,3,8,14,15,43,49)]
+tigmap&lt;-tigmap[!tigmap$id %in% rm.areas,]</code></pre>
+<p>There are multiple ways to do this. I have provided the <code>base R</code> code. It can also be done easily in <code>tidyverse</code> if that is your grammar of choice. Remember that because we ran <code>fortify</code>, <code>tigmap</code> is just a data frame so all the usual subsetting methods are valid. Because I had already run that list of the areas in the map and it printed so nicely with indices, I chose to subset by index. Keep in mind that although many a computer programmer thinks they deserve an appology for this, <code>R</code> is 1 indexed.</p>
+<pre class="r"><code>ggplot()+
+  geom_polygon(data=tigmap,
+               aes(x=long,y=lat,group=group),
+               color=&quot;black&quot;,fill=&quot;white&quot;)+
+  coord_fixed(1.2)</code></pre>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>The reprinted map looks much nicer and its extents are automagically altered to frame the map correctly.</p>
+</div>
+<div id="making-choropleths" class="section level1">
+<h1>Making Choropleths</h1>
+<div id="simulating-data" class="section level2">
+<h2>Simulating Data</h2>
+<pre class="r"><code>set.seed(07122019)
+data&lt;-data.frame(id=unique(tigmap$id),
+           val1=sample(1:1000,length(unique(tigmap$id)),replace=T))
+head(data)
+##            id val1
+## 1     Alabama  245
+## 2     Arizona  408
+## 3    Arkansas  768
+## 4  California  505
+## 5    Colorado  698
+## 6 Connecticut  802</code></pre>
+<p>I have created a data frame of random values to plot on the map. The <code>set.seed</code> function gives the random generation a starting point. If you choose to run this code, you will have the same random numbers, and thus the same map as those created here. It is very important that the regional identifier in your data (in this case the state name), is called “id” so it can be joined into the fortified mapping object.</p>
+</div>
+<div id="merging-data-with-mapping-objects" class="section level2">
+<h2>Merging Data with Mapping Objects</h2>
+<p>In order to map data, we need it to all be in the same data frame.</p>
+<pre class="r"><code>choro&lt;-merge(x=tigmap,y=data,by=&quot;id&quot;)</code></pre>
+<p>The <code>x</code> argument is the mapping object, <code>y</code> is a data frame. There is now a <code>val1</code> column to be mapped.</p>
+</div>
+<div id="mapping-continuous-variables" class="section level2">
+<h2>Mapping Continuous Variables</h2>
+<pre class="r"><code>ggplot()+
+  geom_polygon(data=choro,
+               aes(x=long,y=lat,group=group, fill=val1),
+               color=&quot;black&quot;)+
+  coord_fixed(1.2)</code></pre>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>The only change we make here is that instead of manually specifying the fill color, we place it inside the <code>aes()</code> statement and map it to the values in <code>val1</code>. For more information on altering the look of this map, check out the Aestetic Bits portion of this tutorial.</p>
+</div>
+<div id="mapping-discrete-variables" class="section level2">
+<h2>Mapping Discrete Variables</h2>
+<p>When mapping numeric values, R automatically assumes that they are continuous. Additional code must be run during mapping in order to treat it like a discrete variable. By this method, the data itself is not altered.</p>
+<pre class="r"><code>ggplot()+
+  geom_polygon(data=choro,
+               aes(x=long,y=lat,group=group, 
+                   fill=cut(val1,
+                            breaks=c(0,100,200,300,400,500,
+                                     600,700,800,900,1000))),
+               color=&quot;black&quot;)+
+  coord_fixed(1.2)+
+  labs(fill=&quot;val1&quot;)</code></pre>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><code>cut()</code> cuts a continuous variable into a discrete one. I have chosed to rename the legend (with <code>labs(fill=)</code>) because otherwise it inherits the entire <code>cut()</code> function call and messes up the graphic sizing. A few things to be careful of when using <code>cut()</code>:</p>
+<ol style="list-style-type: decimal">
+<li><p>Keep in mind the range of your values. If there is data outside of the bounds of passed to <code>cut()</code> it will not be plotted correctly.</p></li>
+<li><p>Notice that the first value of the first color block in exclusive, meaning if we were to have any <code>val1==0</code> (we do not), it would not be included in this, or any other grouping. This can be remedied by assuring that the first break passed to <code>cut()</code> is lower than your minimum value (if zero is included in the data, a negetive number can be used). The labels in the legend can be altered later by <code>scale_fill_discrete()</code> or other functions depending on color scheme (see Aestetic Bits for more information about color scales).</p></li>
+</ol>
+</div>
+<div id="mapping-non-numeric-variables" class="section level2">
+<h2>Mapping Non-numeric Variables</h2>
+<pre class="r"><code>data$val2&lt;-sample(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;),length(data$val1),replace=T)</code></pre>
+<p>Here I add a categorical variable to our data frame. It will be merged and plotted just like a numeric variable.</p>
+<pre class="r"><code>choro2&lt;-merge(x=tigmap,y=data,by=&quot;id&quot;)
+ggplot()+
+  geom_polygon(data=choro2,
+               aes(x=long,y=lat,group=group, 
+                   fill=val2),
+               color=&quot;black&quot;)+
+  coord_fixed(1.2)</code></pre>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-17-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/2019/08/14/multi-line-text-in-ggplot2-graphics/">Multi-Line Text in ggplot2 Graphics</a></h4>
+    <h5>August 14, 2019 - 2 minutes</h5>
+    <h5></h5>
+
+    
+
+        <a href="/categories/graphics">
+        <kbd class="item-cat"> Graphics </kbd>
+    </a>
+    
+    
+    <a href="/tags/ggplot2">
+        <kbd class="item-tag"> ggplot2 </kbd>
+    </a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/2019/08/09/using-latex-font-in-graphics/">Using LaTeX Font in Graphics</a></h4>
+    <h5>August 9, 2019 - 2 minutes</h5>
+    <h5></h5>
+
+    
+
+        <a href="/categories/graphics">
+        <kbd class="item-cat"> Graphics </kbd>
+    </a>
+    
+    
+    <a href="/tags/ggplot2">
+        <kbd class="item-tag"> ggplot2 </kbd>
+    </a>
+    
+    <a href="/tags/base-r">
+        <kbd class="item-tag"> Base R </kbd>
+    </a>
+    
+    <a href="/tags/latex">
+        <kbd class="item-tag"> LaTeX </kbd>
+    </a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+</main>
+
+        <footer id = "bigfooter">
+            <div style = "padding:15px;">
+                <p>Powered by <a href="https://gohugo.io">Hugo</a>. Themed by <a href="https://github.com/nathancday/min_night">min_night</a>.
+                </p>
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/"
+                title="Creative Commons Attribution 4.0 International license">
+                <i class="fab fa-creative-commons" aria-hidden="true"></i> Attribution 4.0 International license
+                </a>
+            </div>
+        </footer>
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '');
+        </script>
+       
+    </body>
+
+</html>
+

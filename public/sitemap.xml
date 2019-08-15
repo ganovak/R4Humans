@@ -9,6 +9,11 @@
   </url>
   
   <url>
+    <loc>/project/completeguidetogeoms/</loc>
+    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/graphics/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -21,6 +26,12 @@
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -68,14 +79,8 @@
   </url>
   
   <url>
-    <loc>/project/test/</loc>
+    <loc>/project/mappingwithggplot2/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

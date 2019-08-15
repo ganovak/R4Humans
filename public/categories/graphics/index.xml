@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Complete Guide to ggplot2 Geoms</title>
+      <link>/project/completeguidetogeoms/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/completeguidetogeoms/</guid>
+      <description>ggplot graphics are built by what are called geoms. These basically determine that type of graph that will be produced. Several geoms can be layered into a single graphic, each using different data if necessary. This will be a basic run down of the availible geoms and their common uses.
+Reference LinesGeomDataPurposegeom_abline()slope; interceptDiagonal reference linegeom_hline()yinterceptHorizontal reference linegeom_vline()xinterceptVertical reference lineBar ChartsComing soon</description>
+    </item>
+    
+    <item>
       <title>Multi-Line Text in ggplot2 Graphics</title>
       <link>/2019/08/14/multi-line-text-in-ggplot2-graphics/</link>
       <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>

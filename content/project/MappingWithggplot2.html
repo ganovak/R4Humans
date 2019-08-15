@@ -94,7 +94,7 @@ head(tigmap)
                aes(x=long,y=lat,group=group),
                color=&quot;black&quot;,fill=&quot;white&quot;)+
   coord_fixed(1.2)</code></pre>
-<p><img src="/project/test_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-8-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 <div id="subsetting-mapping-data" class="section level1">
 <h1>Subsetting Mapping Data</h1>
@@ -165,7 +165,7 @@ tigmap&lt;-tigmap[!tigmap$id %in% rm.areas,]</code></pre>
                aes(x=long,y=lat,group=group),
                color=&quot;black&quot;,fill=&quot;white&quot;)+
   coord_fixed(1.2)</code></pre>
-<p><img src="/project/test_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>The reprinted map looks much nicer and its extents are automagically altered to frame the map correctly.</p>
 </div>
 <div id="making-choropleths" class="section level1">
@@ -198,7 +198,7 @@ head(data)
                aes(x=long,y=lat,group=group, fill=val1),
                color=&quot;black&quot;)+
   coord_fixed(1.2)</code></pre>
-<p><img src="/project/test_files/figure-html/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-14-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>The only change we make here is that instead of manually specifying the fill color, we place it inside the <code>aes()</code> statement and map it to the values in <code>val1</code>. For more information on altering the look of this map, check out the Aestetic Bits portion of this tutorial.</p>
 </div>
 <div id="mapping-discrete-variables" class="section level2">
@@ -213,7 +213,7 @@ head(data)
                color=&quot;black&quot;)+
   coord_fixed(1.2)+
   labs(fill=&quot;val1&quot;)</code></pre>
-<p><img src="/project/test_files/figure-html/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p><code>cut()</code> cuts a continuous variable into a discrete one. I have chosed to rename the legend (with <code>labs(fill=)</code>) because otherwise it inherits the entire <code>cut()</code> function call and messes up the graphic sizing. A few things to be careful of when using <code>cut()</code>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Keep in mind the range of your values. If there is data outside of the bounds of passed to <code>cut()</code> it will not be plotted correctly.</p></li>
@@ -231,6 +231,6 @@ ggplot()+
                    fill=val2),
                color=&quot;black&quot;)+
   coord_fixed(1.2)</code></pre>
-<p><img src="/project/test_files/figure-html/unnamed-chunk-17-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p><img src="/project/MappingWithggplot2_files/figure-html/unnamed-chunk-17-1.png" width="480" style="display: block; margin: auto;" /></p>
 </div>
 </div>

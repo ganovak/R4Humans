@@ -1,0 +1,158 @@
+---
+title: "Complete Guide to ggplot2 Geoms"
+author: "Gabby Novak"
+date: '2019-08-14'
+draft: true
+tags: ["ggplot2"]
+categories: ["Graphics"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=5, 
+                      fig.width=5,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      echo=F,
+                      fig.align="center")
+library(gridExtra)
+library(ggplot2)
+library(knitr)
+library(kableExtra)
+library(magrittr)
+set.seed(08142019)
+data<-data.frame(x=sample(1:200,100),
+                 y=sample(1:200,100))
+
+
+```
+
+ggplot graphics are built by what are called geoms. These basically determine that type of graph that will be produced. Several geoms can be layered into a single graphic, each using different data if necessary. This will be a basic run down of the availible geoms and their common uses.
+
+# Reference Lines
+
+```{r, fig.width=8,fig.height=2.5}
+grid.arrange(
+  ggplot(data,aes(x,y))+geom_blank()+geom_abline(intercept=0,slope=1)+labs(title="geom_abline()"),
+  ggplot(data,aes(x,y))+geom_blank()+geom_hline(yintercept=100)+labs(title="geom_hline()"),
+  ggplot(data,aes(x,y))+geom_blank()+geom_vline(xintercept=100)+labs(title="geom_vline()"),
+  ncol=3)
+
+data.frame(Geom=c("geom_abline()","geom_hline()","geom_vline()"),
+           Data=c("slope; intercept","yintercept","xintercept"),
+           Purpose=c("Diagonal reference line","Horizontal reference line","Vertical reference line"))%>%
+  kable(bootstrap=T,align="c")%>%
+  kable_styling(bootstrap_options = c("striped"), full_width = T,position="center")
+```
+
+# Bar Charts
+
+Coming soon
+
+# Heatmaps
+
+Coming soon
+
+# Blank plot
+
+Coming soon
+
+# Box plot
+
+Coming soon
+
+# 2d contours of a 3d surface
+
+Coming soon
+
+# Count overlapping points
+
+Coming soon
+
+# Smoothed Density Estimates
+
+Coming soon
+
+# Contours of a 2d density estimate
+
+Coming soon
+
+# Dot plot
+
+Coming soon
+
+# Horizontal error bars
+
+Coming soon
+
+# Histograms
+
+Coming soon
+
+# Jittered points
+
+Coming soon
+
+# Vertical intervals
+
+Coming soon
+
+# Polygons from a reference map
+
+Coming soon
+
+# Connecting points
+
+Coming soon
+
+# Points
+
+Coming soon
+
+# Ploygons
+
+Coming soon
+
+# Quantile-quantile plot
+
+Coming soon
+
+# Quantile regression
+
+Coming soon
+
+# Ribbons
+
+Coming soon
+
+# Rug plots
+
+Coming soon
+
+# Line segments
+
+Coming soon
+
+# Smoothed conditional means
+
+Coming soon
+
+# Text
+
+Coming soon
+
+# Rectangles
+
+Coming soon
+
+# Violin plots
+
+Coming soon
+
+# sf objects
+
+Coming soon
+
+
+**[Full ggplot2 documentation](https://ggplot2.tidyverse.org/reference/)**
