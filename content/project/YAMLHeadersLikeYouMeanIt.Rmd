@@ -1,0 +1,57 @@
+---
+title: "YAML Headers Like You Mean It"
+author: "Gabby Novak"
+date: '2019-09-02'
+draft: yes
+tags: RMarkdown
+categories: []
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=5, 
+                      fig.width=5,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt"
+```
+
+The YAML (YAML Ain't Markup Language) header is the sections at the beginning of each `.Rmd` file that controls the configuration of the entire document. When a new `.Rmd` is created in RStudio, the defaul YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box. 
+
+```
+---
+title: "Title"
+author: "Author"
+date: "9/2/2019"
+output: html_document
+---
+```
+
+![Base HTML](BaseHTML.PNG)
+
+```
+---
+title: "Title"
+author: "Author"
+date: "9/2/2019"
+output: pdf_document
+---
+```
+![Base PDF](BasePDF.PNG)
+
+Note that when you select a new output format to knit to through the knit button in the interface, it is automatically added to the YAML header. For example, if I were to knit the previous document to pdf, the YAML would automagically read this. Listing additional output options doesn't change the printed output of each output format. 
+
+```
+---
+title: "Title"
+author: "Author"
+date: "9/2/2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+```
+
+
