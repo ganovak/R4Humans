@@ -29,7 +29,7 @@ output: html_document
 ---
 ```
 
-![Base HTML](BaseHTML.PNG)
+![Base HTML](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/BaseHTML.png)
 
 ```
 ---
@@ -39,7 +39,7 @@ date: "9/2/2019"
 output: pdf_document
 ---
 ```
-![Base PDF](BasePDF.PNG)
+![Base PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/BasePDF.png)
 
 Note that when you select a new output format to knit to through the knit button in the interface, it is automatically added to the YAML header. For example, if I were to knit the previous document to pdf, the YAML would automagically read this. Listing additional output options doesn't change the printed output of each output format. 
 
