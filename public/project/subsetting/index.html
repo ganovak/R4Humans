@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>R 4 Humans</title>
+        <title>Subsetting</title>
         <style>
 
     html body {
@@ -94,9 +94,6 @@ $(document).ready(function(){
 </script>
  <meta name="generator" content="Hugo 0.56.3" />
         
-        <link href="/index.xml" rel="alternate" type="application/rss+xml" title="R 4 Humans" />
-        <link href="/index.xml" rel="feed" type="application/rss+xml" title="R 4 Humans" />
-        
         
 
     
@@ -112,12 +109,14 @@ $(document).ready(function(){
     
     
     
-    <meta property="og:title" content="R 4 Humans">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="Subsetting">
+    <meta property="og:type" content="article">
+      
+      <meta name="twitter:card" content="summary">
+      <meta name="twitter:image" content="/" >
+      
     <meta property="description" content="">
     <meta property="og:description" content="">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:image" content="/" >
     
     <meta name="twitter:creator" content="">
     <meta name="twitter:site" content="">
@@ -135,7 +134,7 @@ $(document).ready(function(){
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">R 4 Humans</a>
+                    <a class="navbar-brand visible-xs" href="#">Subsetting</a>
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -182,25 +181,126 @@ $(document).ready(function(){
         </nav>
 
 
-<main class = "content-box">
+<main>
 
-    <div class="intro">
+    <div class="item">
 
-        <div>
-         
-        </div>
-        <h2>Hello there, Gabby Novak here,</h2>
-        <p>self-titled graph-ophile and recreational spreadsheet user. I moonlight as an undergrad at the University of Rochester (and some other things besides).</p>
-        <h1>This is R 4 Humans,</h1>
-        <p>your go to R tutorials that ordinary mortals can understand, no stats or comp sci background required</p>
-        <h2>How this works</h2>
-        <p><b>Quick Tasks:</b> These are short posts with instructions on completing a specific task.
-        <br>
-        <b>Learning:</b> These are longer posts which deal with more general topics.
-        <br>
-        <b>Topics:</b> This is a list of topics covered in the two aforementioned sections. Go here if you're looking for something specific.</p>
-        
-    </div>
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/project/subsetting/">Subsetting</a></h4>
+    <h5>August 9, 2019 - 2 minutes</h5>
+    <h5></h5>
+
+    
+
+        <a href="/categories/r-for-rookies">
+        <kbd class="item-cat"> R for Rookies </kbd>
+    </a>
+    
+    
+    <a href="/tags/base-r">
+        <kbd class="item-tag"> Base R </kbd>
+    </a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify">
+
+
+<div id="subsetting-in-1-dimention" class="section level1">
+<h1>Subsetting in 1 Dimention</h1>
+<p>Subsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimentions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimentional objects are easily generalizable.</p>
+<pre><code>General form for subsetting in 1 dimention:
+&lt;object&gt;[&lt;SubsettingCondition&gt;]</code></pre>
+<pre class="r"><code># The vector we will be subsetting
+x &lt;- c(1,1,2,3,5,8,13)
+
+# Keep in mind that vectors cannot mix data types
+# The code below creates a character vector; the numbers are coerced into characters
+# x &lt;- c(1,2,3,&quot;a&quot;,&quot;b&quot;,&quot;c&quot;)</code></pre>
+<div id="subsetting-by-indexing" class="section level2">
+<h2>Subsetting by Indexing</h2>
+<p>R, like other programming languages, assigns indexes to objects containing multiple elements. An index is simply a numerical reference, based on the element’s position in the order of the object, beginning at 1 for the first element and continuing sequentially until the last element. Subsetting by referencing these positions is perhaps the most straight forward method.</p>
+<pre class="r"><code># Subsetting the first element from x
+x[1]
+## [1] 1
+
+# Subsetting the second element from x
+x[2]
+## [1] 1
+
+# Subsetting the 7th element from x
+x[7]
+## [1] 13
+
+# Attempting to subset outside the range of the object (there is no 8th element in x) returns NA
+x[8]
+## [1] NA
+
+# Subsetting elements 3 through 6 from x
+x[3:6]
+## [1] 2 3 5 8</code></pre>
+</div>
+</div>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/2019/08/09/using-latex-font-in-graphics/">Using LaTeX Font in Graphics</a></h4>
+    <h5>August 9, 2019 - 2 minutes</h5>
+    <h5></h5>
+
+    
+
+        <a href="/categories/graphics">
+        <kbd class="item-cat"> Graphics </kbd>
+    </a>
+    
+    
+    <a href="/tags/ggplot2">
+        <kbd class="item-tag"> ggplot2 </kbd>
+    </a>
+    
+    <a href="/tags/base-r">
+        <kbd class="item-tag"> Base R </kbd>
+    </a>
+    
+    <a href="/tags/latex">
+        <kbd class="item-tag"> LaTeX </kbd>
+    </a>
+    
+
+</div>
+ 
+
+    
+
+    
 
 </main>
 
@@ -226,6 +326,4 @@ $(document).ready(function(){
     </body>
 
 </html>
-
-
 

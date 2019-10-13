@@ -1,0 +1,59 @@
+---
+title: "Subsetting"
+author: "Gabby Novak"
+date: '2019-08-09'
+subtitle: "The Practical Bits"
+tags: ["Base R"]
+categories: ["R for Rookies"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=5, 
+                      fig.width=5,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+# dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/MappingWithggplot2"
+```
+
+# Subsetting in 1 Dimention
+
+Subsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimentions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimentional objects are easily generalizable.
+
+```
+General form for subsetting in 1 dimention:
+<object>[<SubsettingCondition>]
+```
+
+```{r}
+# The vector we will be subsetting
+x <- c(1,1,2,3,5,8,13)
+
+# Keep in mind that vectors cannot mix data types
+# The code below creates a character vector; the numbers are coerced into characters
+# x <- c(1,2,3,"a","b","c")
+```
+
+## Subsetting by Indexing
+
+R, like other programming languages, assigns indexes to objects containing multiple elements. An index is simply a numerical reference, based on the element's position in the order of the object, beginning at 1 for the first element and continuing sequentially until the last element. Subsetting by referencing these positions is perhaps the most straight forward method.
+
+```{r}
+# Subsetting the first element from x
+x[1]
+
+# Subsetting the second element from x
+x[2]
+
+# Subsetting the 7th element from x
+x[7]
+
+# Attempting to subset outside the range of the object (there is no 8th element in x) returns NA
+x[8]
+
+# Subsetting elements 3 through 6 from x
+x[3:6]
+```
+
