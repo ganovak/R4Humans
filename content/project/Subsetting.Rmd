@@ -18,9 +18,9 @@ knitr::opts_chunk$set(collapse = TRUE,
 # dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/MappingWithggplot2"
 ```
 
-# Subsetting in 1 Dimention
+# 1 Dimensional Objects
 
-Subsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimentions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimentional objects are easily generalizable.
+Subsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimensions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimensional objects are easily generalizable.
 
 ```
 General form for subsetting in 1 dimention:
@@ -29,7 +29,7 @@ General form for subsetting in 1 dimention:
 
 ```{r}
 # The vector we will be subsetting
-x <- c(1,1,2,3,5,8,13)
+(x <- c(1,1,2,3,5,8,13))
 
 # Keep in mind that vectors cannot mix data types
 # The code below creates a character vector; the numbers are coerced into characters
@@ -55,5 +55,162 @@ x[8]
 
 # Subsetting elements 3 through 6 from x
 x[3:6]
+
+# Subsetting elements 1,3, and 6 from x
+x[c(1,3,6)]
+```
+
+## Subsetting by Logical Condition
+
+Subsetting by logical condition means keeping only elements for which the condition is true. This is the more powerful form of subsetting. 
+
+```{r}
+# Reminder of the contents of x
+x
+
+#### Simple Logic ####
+# x subset to elements greater than 2
+x[x>2]
+
+# x subset to elements less than or equal to 5
+x[x<=5]
+
+# x subset to elements that equal 1
+x[x==1]
+
+# x subset to elements that are not equal to 8
+x[!x==8]
+
+#### Compound Logic ####
+# x subset to elements greater than 2 AND less than 8
+x[x>2 & x<8]
+
+# x subset to elements less than 3 OR greater than 10
+# Can use numbers that are not in the vector to test against (here, 10)
+x[x<3 | x>10]
+
+# A second vector
+(y <- c(1,2,3,4,5,6,7,8))
+
+# y subset to only those elements that are in x
+y[y %in% x]
+
+# y subset to only those elements that are NOT in x
+y[!y %in% x]
+```
+
+# 2 Dimensional Objects
+
+2 dimensional objects, the most common dimensions for data frames and lists, are often used in data analysis. Subsetting them is not all that different from 1 dimensional objects, but with more options.
+
+```
+General form for subsetting in 1 dimention:
+<object>[<RowSubsettingCondition>,<ColumnSubsettingCondition]
+```
+
+```{r}
+# New two dimentional object
+xy <- data.frame(col1=c(1,1,2,3,5,8,13),
+                  col2=c("a","k","z","y","z","k","a"),
+                  col3=c(1,"b",3,NA,5,"f",7),
+                  col4=c(T,F,T,F,T,F,T))
+```
+```{r, include=F}
+xy$col2<-as.character(xy$col2)
+xy$col3<-as.character(xy$col3)
+```
+
+```{r}
+xy
+```
+
+## Subsetting by Indexing
+
+The only difference here is that you now have to subset in two directions. If you try to subset in one dimension, it will assume you are referencing a column. In terms of returns, you have 3 classes:
+
+- Class A: A single element. Here, you've subsetted down to a single element to just this value is returned.
+- Class B: A 1 dimensional object. Here, you've subsetted down to a vector. This is a 1 dimensional object with all the same data type. A vector is returned.
+- Class C: A 2 dimensional object. Here, you've subsetted to a differently shaped table than you used to have. It returns a data frame. The one confusing thing here is that an object that would otherwise appear to be 1 dimensional will return as a data frame if the elements are of different data types (i.e. includes numbers and characters). Vectors require all elements to be of the same data type. Data frames require each column to contain the same data type but rows can vary (which is exactly how this happens).
+
+```{r}
+# xy subset to the element in the 1st row, 1st column (class A)
+xy[1,1]
+
+# xy subset to the element in the 6th row, 3rd column (class A)
+xy[6,3]
+
+# xy subset to the 5th row, all columns (class B)
+xy[5,]
+
+# xy subset to the 2nd column, all rows (class C; 1 dimentional special case)
+xy[,2]
+
+# xy subset to rows 6 and 7 in columns 2 and 3 (class C)
+xy[6:7,2:3]
+
+# xy subset to rows 1 and 6 in columns 1 and 3 (class C)
+xy[c(1,6),c(1,3)]
+
+# xy subset to 3rd column (class C)
+xy[3]
+```
+
+## Subsetting by Name
+
+Vectors don't have names elements. However 2-dimensional objects can have column names. These can be used to subset.
+
+```{r}
+# xy subset to all rows and the column named "col2"
+xy[,"col2"]
+
+# xy subset to row 3 and the column named "col2"
+xy[3,"col2"]
+```
+
+## Subsetting by Logical Condition
+
+If you want to subset by logical condition in a 2 dimensional object, it is easier to do it by naming the column you are working with. This simplifies the subsettting down to a 1 dimensional situation. 
+
+```
+Subsetting with named columns:
+<dataset>$<column>[<RowSubsetCondition>]
+```
+
+```{r}
+# Reminder of contents of xy
+xy
+
+# col1 of xy subset to elements greater than 3
+xy$col1[xy$col1>3]
+
+# col4 of xy subset to character elements (there are none so ColType(0) is returned)
+xy$col4[is.character(xy$col4)]
+
+# col1 of xy subset to elements that equal 1
+xy$col1[xy$col1==1]
+
+# col3 of xy subset to elements that are not f
+xy$col3[!xy$col3=="f"]
+
+```
+
+# Using Subsetting to Exclude Observations
+
+```{r}
+# Excluding elements in col2 that are z by making them NA
+xy$col2[xy$col2=="z"] <- NA
+xy
+
+# Excluding the entire 7th row
+xy[7,] <- NA
+xy
+```
+
+# Using Subsetting to Change Data Types
+
+```{r}
+# Converting the 4th column of xy to numeric (TRUE==1, FALSE==0)
+xy[,4]<-as.numeric(xy[,4])
+xy
 ```
 
