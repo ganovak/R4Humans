@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on R 4 Humans</title>
+    <title>Quick Learning on R 4 Humans</title>
     <link>/post/</link>
     <description>Recent content in Posts on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
@@ -18,7 +18,19 @@
       
       <guid>/2019/08/14/multi-line-text-in-ggplot2-graphics/</guid>
       <description>In terms of labeling, ggplot2 provides a lot of options. However, the default is to put this text in a single line, regardless of length. This can do real strange things to spacing within the figure. Shortening labels is not always an option, so here we will explore the available labels for ggplot figures and how to force multi-lines.
-Available labels# simulating dataset.seed(08142019)data&amp;lt;-data.frame(x=sample(1:100,100),y=sample(1:100,100),cat1=sample(c(&amp;quot;group 1&amp;quot;,&amp;quot;group 2&amp;quot;),100,replace=T),cat2=sample(c(&amp;quot;type 1&amp;quot;,&amp;quot;type 2&amp;quot;),100,replace=T))# plot without label specifcationlibrary(ggplot2)plot1&amp;lt;-ggplot(data,aes(x,y,shape=cat1,color=cat2))+geom_point()plot1If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends.</description>
+Available labels
+# simulating data
+set.seed(08142019)
+data&amp;lt;-data.frame(x=sample(1:100,100),
+y=sample(1:100,100),
+cat1=sample(c(&amp;quot;group 1&amp;quot;,&amp;quot;group 2&amp;quot;),100,replace=T),
+cat2=sample(c(&amp;quot;type 1&amp;quot;,&amp;quot;type 2&amp;quot;),100,replace=T))
+# plot without label specifcation
+library(ggplot2)
+plot1&amp;lt;-ggplot(data,aes(x,y,shape=cat1,color=cat2))+
+geom_point()
+plot1
+If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends.</description>
     </item>
     
     <item>
