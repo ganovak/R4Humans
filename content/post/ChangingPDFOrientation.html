@@ -1,0 +1,36 @@
+---
+title: "Changing PDF Orientation"
+author: "Gabby Novak"
+date: 2019-10-13
+categories: ["PDFs"]
+tags: ["LaTeX"]
+---
+
+
+
+<div id="changing-the-orientation-for-the-whole-document" class="section level1">
+<h1>Changing the orientation for the whole document</h1>
+<p>PDFs knit in a portrait orientation by default. However, should you want to output a PDF in landscape mode, it has to be specified in the LaTeX arguments in the YAML header.</p>
+<pre><code>---
+title: &quot;Landscape PDF&quot;
+subtitle: &quot;This demonstrates a landscape PDF output&quot;
+output: pdf_document
+classoption: landscape
+---
+This document is 8.5 inches tall and 11 inches wide.</code></pre>
+<p>** The code above produces <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/ChangingPDFOrientation/Landscape.pdf%22">this output</a>**</p>
+</div>
+<div id="changing-the-orientation-for-specific-pages" class="section level1">
+<h1>Changing the orientation for specific pages</h1>
+<p>Sometimes, you have a report with graphics that would be better displayed in landscape mode but overall, you’d like the document to be in standard portrait mode. To accomplish this, you will need to use the LaTeX package <code>pdflscape</code> and use the following code in your YAML header.</p>
+<pre><code>---
+title: &quot;Variable Orientation&quot;
+subtitle: &quot;This demonstrates a variable orientation PDF output&quot;
+output: 
+  pdf_document:
+header-includes:
+- \usepackage{pdflscape}
+---</code></pre>
+<p>Anything you would like in portrait mode, encase in <code>\begin{landscape}</code> and <code>\end{landscape}</code> commands. Anything not between these two calls will be the default portrait mode.</p>
+<p>** Example output can be found <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/ChangingPDFOrientation/VariableOrientation.pdf%22">here</a> **</p>
+</div>

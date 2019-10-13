@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Base R</title>
+        <title>Changing PDF Orientation</title>
         <style>
 
     html body {
@@ -94,9 +94,6 @@ $(document).ready(function(){
 </script>
  <meta name="generator" content="Hugo 0.56.3" />
         
-        <link href="/tags/base-r/index.xml" rel="alternate" type="application/rss+xml" title="R 4 Humans" />
-        <link href="/tags/base-r/index.xml" rel="feed" type="application/rss+xml" title="R 4 Humans" />
-        
         
 
     
@@ -112,7 +109,7 @@ $(document).ready(function(){
     
     
     
-    <meta property="og:title" content="Base R">
+    <meta property="og:title" content="Changing PDF Orientation">
     <meta property="og:type" content="article">
       
       <meta name="twitter:card" content="summary">
@@ -137,7 +134,7 @@ $(document).ready(function(){
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand visible-xs" href="#">Base R</a>
+                    <a class="navbar-brand visible-xs" href="#">Changing PDF Orientation</a>
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -185,82 +182,118 @@ $(document).ready(function(){
 
 
 <main>
-    <h2>Base R</h2>
+
+    <div class="item">
 
     
-        
-            <div class="item">
+    
     
 
+    
+    
+      
+    
 
-
-
-
-
-  
-
-
-<h4><a href="/project/subsetting/">Subsetting</a></h4>
-    <h5>October 13, 2019</h5>
+    <h4><a href="/2019/10/13/changing-pdf-orientation/">Changing PDF Orientation</a></h4>
+    <h5>October 13, 2019 - 1 minutes</h5>
     <h5></h5>
-    
-<a href="/categories/r-for-rookies">
-    <kbd class="item-cat"> R for Rookies </kbd>
-        </a>
-        
-    
-    <a href="/tags/base-r">
-        <kbd class="item-tag"> Base R </kbd>
-            </a>
-            
-        
-        </div>
-            
-        
-    
-        
-            <div class="item">
+
     
 
+        <a href="/categories/pdfs">
+        <kbd class="item-cat"> PDFs </kbd>
+    </a>
+    
+    
+    <a href="/tags/latex">
+        <kbd class="item-tag"> LaTeX </kbd>
+    </a>
+    
+
+</div>
 
 
+    <br> <div class="text-justify">
 
 
+<div id="changing-the-orientation-for-the-whole-document" class="section level1">
+<h1>Changing the orientation for the whole document</h1>
+<p>PDFs knit in a portrait orientation by default. However, should you want to output a PDF in landscape mode, it has to be specified in the LaTeX arguments in the YAML header.</p>
+<pre><code>---
+title: &quot;Landscape PDF&quot;
+subtitle: &quot;This demonstrates a landscape PDF output&quot;
+output: pdf_document
+classoption: landscape
+---
+This document is 8.5 inches tall and 11 inches wide.</code></pre>
+<p>** The code above produces <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/ChangingPDFOrientation/Landscape.pdf%22">this output</a>**</p>
+</div>
+<div id="changing-the-orientation-for-specific-pages" class="section level1">
+<h1>Changing the orientation for specific pages</h1>
+<p>Sometimes, you have a report with graphics that would be better displayed in landscape mode but overall, you’d like the document to be in standard portrait mode. To accomplish this, you will need to use the LaTeX package <code>pdflscape</code> and use the following code in your YAML header.</p>
+<pre><code>---
+title: &quot;Variable Orientation&quot;
+subtitle: &quot;This demonstrates a variable orientation PDF output&quot;
+output: 
+  pdf_document:
+header-includes:
+- \usepackage{pdflscape}
+---</code></pre>
+<p>Anything you would like in portrait mode, encase in <code>\begin{landscape}</code> and <code>\end{landscape}</code> commands. Anything not between these two calls will be the default portrait mode.</p>
+<p>** Example output can be found <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/ChangingPDFOrientation/VariableOrientation.pdf%22">here</a> **</p>
+</div>
+</div>
 
-  
+    
+    
 
+    
 
-<h4><a href="/2019/08/09/using-latex-font-in-graphics/">Using LaTeX Font in Graphics</a></h4>
-    <h5>August 9, 2019</h5>
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+      
+    
+
+    <h4><a href="/2019/08/09/using-latex-font-in-graphics/">Using LaTeX Font in Graphics</a></h4>
+    <h5>August 9, 2019 - 2 minutes</h5>
     <h5></h5>
+
     
-<a href="/categories/graphics">
-    <kbd class="item-cat"> Graphics </kbd>
-        </a>
-        
+
+        <a href="/categories/graphics">
+        <kbd class="item-cat"> Graphics </kbd>
+    </a>
+    
     
     <a href="/tags/ggplot2">
         <kbd class="item-tag"> ggplot2 </kbd>
-            </a>
-            
+    </a>
+    
     <a href="/tags/base-r">
         <kbd class="item-tag"> Base R </kbd>
-            </a>
-            
+    </a>
+    
     <a href="/tags/latex">
         <kbd class="item-tag"> LaTeX </kbd>
-            </a>
-            
-        
-        </div>
-            
-        
+    </a>
     
+
+</div>
+ 
+
     
+
+    
+
 </main>
-
-
-
 
         <footer id = "bigfooter">
             <div style = "padding:15px;">
