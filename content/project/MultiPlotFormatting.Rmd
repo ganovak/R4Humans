@@ -1,12 +1,9 @@
 ---
-title: "Graphic Alignment"
+title: "Multi-Plot Formatting"
 author: "Gabby Novak"
 date: '2019-10-21'
-tags:
-- cowplot
-- gridExtra
-- marrange
-categories: Graphics
+tags: ["gridExtra","cowplot","ggpubr"]
+categories: ["Graphics",]
 ---
 
 ```{r setup, include=F}
