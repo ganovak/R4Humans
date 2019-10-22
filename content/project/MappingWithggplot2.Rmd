@@ -20,7 +20,7 @@ dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/MappingWithggplot2"
 
 # Reading in Spatial Objects
 
-## From tigiris files
+## From tigris files
 
 There are many packages that make sourcing shp files easier. We will focus on the `tigris` package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.
 

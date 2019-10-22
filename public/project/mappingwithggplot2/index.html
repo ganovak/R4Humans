@@ -226,8 +226,8 @@ $(document).ready(function(){
 
 <div id="reading-in-spatial-objects" class="section level1">
 <h1>Reading in Spatial Objects</h1>
-<div id="from-tigiris-files" class="section level2">
-<h2>From tigiris files</h2>
+<div id="from-tigris-files" class="section level2">
+<h2>From tigris files</h2>
 <p>There are many packages that make sourcing shp files easier. We will focus on the <code>tigris</code> package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.</p>
 <pre class="r"><code>library(tigris)
 tig&lt;-states(year = 2017)</code></pre>
@@ -260,7 +260,7 @@ tig&lt;-states(year = 2017)</code></pre>
 <pre class="r"><code>list.files(paste0(dir,&quot;/MappingObjects&quot;))
 ## [1] &quot;tl_2017_us_state.dbf&quot; &quot;tl_2017_us_state.prj&quot; &quot;tl_2017_us_state.shp&quot;
 ## [4] &quot;tl_2017_us_state.shx&quot;</code></pre>
-<p><strong>Access the maps used in this demonstration <a href="https://github.com/ganovak/R4Humans-AuxFiles/tree/master/MappingWithggplot2">here</a></strong></p>
+<p><strong>Access the maps used in this demonstration <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/tree/master/MappingWithggplot2%22">here</a></strong></p>
 <p>A note on rdgal. This is the package I use to read in mapping files. Thing is, it be can be persnickety. When you library it, several lines into the load message is a section which says “GDAL binary built with GEOS:”. For rgdal to work properly, this needs to be “TRUE”. If it is not, you will need to run <code>install.packages("gdalUtils")</code> and then re-install rgdal. Now, when you library rgdal, the binary should be TRUE.</p>
 <pre class="r"><code>library(rgdal)
 shp&lt;-readOGR(dsn=paste0(dir,&quot;/MappingObjects&quot;),layer=&quot;tl_2017_us_state&quot;)

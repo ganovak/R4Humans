@@ -11,64 +11,65 @@ categories: ["Graphics",]
 <p>Adding one plot to a report is not hard. The difficulty comes when two or more plots are required to be arranged in some sort of grid (this includes just two graphs side by side). There are several options for how this is accomplished based on what specific arguments are needed.</p>
 <div id="data-preparation" class="section level1">
 <h1>Data Preparation</h1>
-<p><strong>Example data used in demonstration available <embed src="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/MultiPlotFormatting/icd10cm_order_2018.csv%22" /></strong></p>
+<p><strong>Example data used in demonstration available <a href="%22https://github.com/ganovak/R4Humans-AuxFiles/blob/master/MultiPlotFormatting/icd10cm_order_2018.csv%22">here</a></strong></p>
 <pre class="r"><code>#### Packages ####
 library(tidyverse)
 
 #### Data Read In ####
-diseases &lt;- read.csv(paste0(dir,&quot;icd10cm_order_2018.csv&quot;))
+diseases &lt;- read.csv(paste0(dir, &quot;icd10cm_order_2018.csv&quot;))
 
 #### Data Split ####
 infectious &lt;- diseases %&gt;%
-  filter(str_detect(ICD10Code,&quot;(A|B)&quot;))
+  filter(str_detect(ICD10Code, &quot;(A|B)&quot;))  # Filtering to ICD10 codes for infectious diseases
 cancer &lt;- diseases %&gt;%
-  filter(str_detect(ICD10Code, &quot;^(C|D(1|2|3|4(0|1|2|3|4|5|6|7|8)))&quot;))
+  filter(str_detect(ICD10Code, &quot;^(C|D(1|2|3|4(0|1|2|3|4|5|6|7|8)))&quot;))  # Filtering to ICD10 codes for cancers
+
+# Make random subset
 set.seed(10212019)
-infectious &lt;- remove_rownames(infectious[sample(1:nrow(infectious),8),c(2,4)])%&gt;%
-  bind_cols(clinicA = sample(1:2000,8),
-            clinicB = sample(1:2000,8))
-cancer &lt;- remove_rownames(cancer[sample(1:nrow(cancer),8),c(2,4)])%&gt;%
-  bind_cols(clinicA = sample(1:2000,8),
-            clinicB = sample(1:2000,8))</code></pre>
+infectious &lt;- remove_rownames(infectious[sample(1:nrow(infectious), 8), c(2, 4)])%&gt;%
+  bind_cols(clinicA = sample(1:2000, 8),
+            clinicB = sample(1:2000, 8))
+cancer &lt;- remove_rownames(cancer[sample(1:nrow(cancer), 8), c(2, 4)])%&gt;%
+  bind_cols(clinicA = sample(1:2000, 8),
+            clinicB = sample(1:2000, 8))</code></pre>
 </div>
-<div id="basic-arrangement-gridextragrid.arrange" class="section level1">
-<h1>Basic Arrangement: <code>gridExtra::grid.arrange()</code></h1>
+<div id="basic-arrangement" class="section level1">
+<h1>Basic Arrangement</h1>
 <pre class="r"><code>#### Package ####
 library(gridExtra)
 
 #### Plotting ####
-codesA&lt;-ggplot(cancer,aes(ICD10Code,clinicA))+
-  geom_col()+
-  labs(x=&quot;ICD10 Code&quot;,y=&quot;Count&quot;,title=&quot;Clinic A&quot;)+
-  coord_flip()
+codesA &lt;- ggplot(cancer, aes(ICD10Code, clinicA)) +
+  geom_col() +
+  labs(x = &quot;ICD10 Code&quot;, y = &quot;Count&quot;, title = &quot;Clinic A&quot;) +
+  coord_flip()  # Flip positions of x and y axis
 
-codesB&lt;-ggplot(cancer,aes(ICD10Code,clinicB))+
-  geom_col()+
-  labs(x=&quot;ICD10 Code&quot;,y=&quot;Count&quot;,title=&quot;Clinic B&quot;)+
+codesB &lt;- ggplot(cancer, aes(ICD10Code, clinicB)) +
+  geom_col() +
+  labs(x = &quot;ICD10 Code&quot;, y = &quot;Count&quot;, title = &quot;Clinic B&quot;) +
   coord_flip()
 
 #### Horizontal Orientation ####
-grid.arrange(codesA,codesB,ncol=2)</code></pre>
+grid.arrange(codesA, codesB, ncol=2)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>
-#### Vertical Orientation ####
-grid.arrange(codesA,codesB,nrow=2)</code></pre>
+<pre class="r"><code>#### Vertical Orientation ####
+grid.arrange(codesA, codesB, nrow=2)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="adding-text-arguments" class="section level2">
 <h2>Adding text arguments</h2>
 <p><code>grid.arrange</code> has arguments for adding text to the top, bottom, left, and right of the combined plot object.</p>
 <pre class="r"><code>#### Basic Labelling ####
-grid.arrange(codesA,codesB,ncol=2,top=&quot;Cases of Selected Cancers&quot;,
-             bottom=&quot;Note: Data is simulated&quot;,left=&quot;Left text if you need it&quot;,
-             right=&quot;Right text if you need it&quot;)</code></pre>
+grid.arrange(codesA, codesB, ncol = 2, top = &quot;Cases of Selected Cancers&quot;,
+             bottom = &quot;Note: Data is simulated&quot;, left = &quot;Left text if you need it&quot;,
+             right = &quot;Right text if you need it&quot;)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Text labels can be further adjusted with <code>ggpubr::text_grob</code>.</p>
 <pre class="r"><code>#### Adjusted Labelling ####
 library(ggpubr)
 
-grid.arrange(codesA,codesB,ncol=2,
-             top=text_grob(&quot;Cases of Selected Cancers&quot;,size=16,face=&quot;bold&quot;),
-             bottom=text_grob(&quot;Note: Data is simulated&quot;,size=8,face=&quot;italic&quot;,hjust=-2))</code></pre>
+grid.arrange(codesA, codesB, ncol = 2,
+             top = text_grob(&quot;Cases of Selected Cancers&quot;, size = 16, face = &quot;bold&quot;),
+             bottom = text_grob(&quot;Note: Data is simulated&quot;, size = 8, face = &quot;italic&quot;, hjust = -2))</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
@@ -76,72 +77,71 @@ grid.arrange(codesA,codesB,ncol=2,
 <h1>Alignment</h1>
 <p>This is all good and wonderful until something like this happens (Yes those are the same graph, albeit in a different order, but I’m trying to prove a point). Oof. That’s a homely child.</p>
 <pre class="r"><code>#### Plotting ####
-desc &lt;- ggplot(infectious,aes(ShortDesc,clinicA))+
+desc &lt;- ggplot(infectious, aes(ShortDesc, clinicA))+
   geom_col()
 descf &lt;- desc + coord_flip()
-desc &lt;- desc + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+desc &lt;- desc + theme(axis.text.x = element_text(angle = 45, hjust = 1))  # turn x axis labels
 
-code &lt;- ggplot(infectious,aes(ICD10Code,clinicA))+
+code &lt;- ggplot(infectious, aes(ICD10Code, clinicA)) +
   geom_col()
 codef &lt;- code + coord_flip()
 code &lt;- code + theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 #### Ugly Arrangements ####
-grid.arrange(codef,descf,nrow=2)</code></pre>
+grid.arrange(codef, descf, nrow = 2)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>grid.arrange(code,desc,ncol=2)</code></pre>
+<pre class="r"><code>grid.arrange(code, desc, ncol = 2)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p><code>grid.arrange</code> doesn’t allow for easy alignment. For that, we need the <code>cowplot</code> package.</p>
 <pre class="r"><code>library(cowplot)
 
 #### Vertical Orientation ####
-plot_grid(descf,codef,nrow=2,align=&quot;v&quot;)</code></pre>
+plot_grid(descf, codef, nrow = 2, align = &quot;v&quot;)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>
-#### Horizontal Orientation ####
-plot_grid(code,desc,ncol=2,align=&quot;h&quot;)</code></pre>
+<pre class="r"><code>#### Horizontal Orientation ####
+plot_grid(code, desc, ncol = 2, align = &quot;h&quot;)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>To be fair, this one is still pretty homely, but it’s an improvement.</p>
 <div id="adding-text-arguments-1" class="section level2">
 <h2>Adding text arguments</h2>
 <p>Adding text labels to cowplots are not the easiest. It involved the nesting of cowplot arrangements. The <code>rel_heights</code> argument overrides some super questionable default spacing.</p>
-<pre class="r"><code>plots &lt;- plot_grid(descf,codef,nrow=2,align=&quot;v&quot;)
+<pre class="r"><code>plots &lt;- plot_grid(descf, codef, nrow = 2, align = &quot;v&quot;)
 title &lt;- ggdraw() + draw_label(&quot;Cases of Selected Infectious Diseases&quot;)
-plot_grid(title,plots,ncol=1, rel_heights=c(.5,11))</code></pre>
+plot_grid(title, plots, ncol = 1, rel_heights = c(.5, 11))</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="shared-legends" class="section level1">
 <h1>Shared Legends</h1>
 <p>If you have two graphs with the same legend, repeating it is often unsightly. One way to deal with this is to have one and print it on a side like so.</p>
-<pre class="r"><code>can &lt;- cancer%&gt;%
-  gather(clinic,count,3:4)%&gt;%
-  ggplot(aes(ICD10Code,count,fill=clinic)) +
-    geom_col()+
-    labs(x=&quot;ICD10 Codes&quot;,y=&quot;Count&quot;,fill=&quot;Clinic&quot;,title=&quot;Select Cancers&quot;)+
+<pre class="r"><code>can &lt;- cancer %&gt;%
+  gather(clinic, count, 3:4) %&gt;%
+  ggplot(aes(ICD10Code, count, fill = clinic)) +
+    geom_col() +
+    labs(x=&quot;ICD10 Codes&quot;, y=&quot;Count&quot;, fill=&quot;Clinic&quot;, title=&quot;Select Cancers&quot;) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-inf &lt;- infectious%&gt;%
-  gather(clinic,count,3:4)%&gt;%
-  ggplot(aes(ICD10Code,count,fill=clinic)) +
-    geom_col()+
-  labs(x=&quot;ICD10 Codes&quot;,y=&quot;Count&quot;,fill=&quot;Clinic&quot;,title=&quot;Select Infectious Diseases&quot;)+
-  theme(legend.position=&quot;none&quot;,
+inf &lt;- infectious %&gt;%
+  gather(clinic, count, 3:4) %&gt;%
+  ggplot(aes(ICD10Code, count, fill = clinic)) +
+    geom_col() +
+  labs(x = &quot;ICD10 Codes&quot;, y = &quot;Count&quot;, fill = &quot;Clinic&quot;, title = &quot;Select Infectious Diseases&quot;) +
+  theme(legend.position = &quot;none&quot;,
         axis.text.x = element_text(angle = 90, hjust = 1))
 
-grid.arrange(inf,can,ncol=2)</code></pre>
+grid.arrange(inf, can, ncol = 2)</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The issue here is that each plot is given equal space within the combined plot. However, because the cancer plot has the legend, the actual plot area is smaller than the infectious disease plot. <code>gglot2</code> allows for moving the legend to the bottom but then it will be off-center. The answer is, yet again, another package.</p>
 <pre class="r"><code>library(ggpubr)
 
-inf &lt;- inf + theme(legend.position=&quot;right&quot;)
+inf &lt;- inf + theme(legend.position = &quot;right&quot;)  # adding back legend
 
-(plots &lt;- ggarrange(inf, can, ncol=2, common.legend=T,legend=&quot;bottom&quot;))</code></pre>
+(plots &lt;- ggarrange(inf, can, ncol = 2, common.legend = T, legend = &quot;bottom&quot;))</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="adding-text-arguments-2" class="section level2">
 <h2>Adding text arguments</h2>
-<pre class="r"><code>annotate_figure(plots,top=text_grob(&quot;Cases by Clinic and Disease Category&quot;,
-                                    size=16,face=&quot;bold&quot;))</code></pre>
+<pre class="r"><code>annotate_figure(plots, top = text_grob(&quot;Cases by Clinic and Disease Category&quot;,
+                                    size = 16, face = &quot;bold&quot;))</code></pre>
 <p><img src="/project/MultiPlotFormatting_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
