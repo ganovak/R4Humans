@@ -1,0 +1,179 @@
+---
+title: "Graphic Alignment"
+author: "Gabby Novak"
+date: '2019-10-21'
+tags:
+- cowplot
+- gridExtra
+- marrange
+categories: Graphics
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+
+dir <- "C:/Users/gabri/Documents/R/R4Humans-AuxFiles/MultiPlotFormatting/"
+```
+
+Adding one plot to a report is not hard. The difficulty comes when two or more plots are required to be arranged in some sort of grid (this includes just two graphs side by side). There are several options for how this is accomplished based on what specific arguments are needed.
+
+# Data Preparation
+
+**Example data used in demonstration available ![here]("https://github.com/ganovak/R4Humans-AuxFiles/blob/master/MultiPlotFormatting/icd10cm_order_2018.csv")**
+
+```{r}
+#### Packages ####
+library(tidyverse)
+
+#### Data Read In ####
+diseases <- read.csv(paste0(dir,"icd10cm_order_2018.csv"))
+
+#### Data Split ####
+infectious <- diseases %>%
+  filter(str_detect(ICD10Code,"(A|B)"))
+cancer <- diseases %>%
+  filter(str_detect(ICD10Code, "^(C|D(1|2|3|4(0|1|2|3|4|5|6|7|8)))"))
+set.seed(10212019)
+infectious <- remove_rownames(infectious[sample(1:nrow(infectious),8),c(2,4)])%>%
+  bind_cols(clinicA = sample(1:2000,8),
+            clinicB = sample(1:2000,8))
+cancer <- remove_rownames(cancer[sample(1:nrow(cancer),8),c(2,4)])%>%
+  bind_cols(clinicA = sample(1:2000,8),
+            clinicB = sample(1:2000,8))
+```
+
+# Basic Arrangement: `gridExtra::grid.arrange()`
+
+```{r}
+#### Package ####
+library(gridExtra)
+
+#### Plotting ####
+codesA<-ggplot(cancer,aes(ICD10Code,clinicA))+
+  geom_col()+
+  labs(x="ICD10 Code",y="Count",title="Clinic A")+
+  coord_flip()
+
+codesB<-ggplot(cancer,aes(ICD10Code,clinicB))+
+  geom_col()+
+  labs(x="ICD10 Code",y="Count",title="Clinic B")+
+  coord_flip()
+
+#### Horizontal Orientation ####
+grid.arrange(codesA,codesB,ncol=2)
+
+#### Vertical Orientation ####
+grid.arrange(codesA,codesB,nrow=2)
+
+```
+
+## Adding text arguments
+
+`grid.arrange` has arguments for adding text to the top, bottom, left, and right of the combined plot object.
+
+```{r}
+#### Basic Labelling ####
+grid.arrange(codesA,codesB,ncol=2,top="Cases of Selected Cancers",
+             bottom="Note: Data is simulated",left="Left text if you need it",
+             right="Right text if you need it")
+```
+
+Text labels can be further adjusted with `ggpubr::text_grob`. 
+
+```{r}
+#### Adjusted Labelling ####
+library(ggpubr)
+
+grid.arrange(codesA,codesB,ncol=2,
+             top=text_grob("Cases of Selected Cancers",size=16,face="bold"),
+             bottom=text_grob("Note: Data is simulated",size=8,face="italic",hjust=-2))
+```
+
+# Alignment
+
+This is all good and wonderful until something like this happens (Yes those are the same graph, albeit in a different order, but I'm trying to prove a point). Oof. That's a homely child. 
+
+```{r}
+#### Plotting ####
+desc <- ggplot(infectious,aes(ShortDesc,clinicA))+
+  geom_col()
+descf <- desc + coord_flip()
+desc <- desc + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+code <- ggplot(infectious,aes(ICD10Code,clinicA))+
+  geom_col()
+codef <- code + coord_flip()
+code <- code + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+#### Ugly Arrangements ####
+grid.arrange(codef,descf,nrow=2)
+grid.arrange(code,desc,ncol=2)
+```
+
+`grid.arrange` doesn't allow for easy alignment. For that, we need the `cowplot` package.
+
+```{r}
+library(cowplot)
+
+#### Vertical Orientation ####
+plot_grid(descf,codef,nrow=2,align="v")
+
+#### Horizontal Orientation ####
+plot_grid(code,desc,ncol=2,align="h")
+```
+
+To be fair, this one is still pretty homely, but it's an improvement.
+
+## Adding text arguments
+
+Adding text labels to cowplots are not the easiest. It involved the nesting of cowplot arrangements. The `rel_heights` argument overrides some super questionable default spacing.
+
+```{r}
+plots <- plot_grid(descf,codef,nrow=2,align="v")
+title <- ggdraw() + draw_label("Cases of Selected Infectious Diseases")
+plot_grid(title,plots,ncol=1, rel_heights=c(.5,11))
+```
+
+# Shared Legends
+
+If you have two graphs with the same legend, repeating it is often unsightly. One way to deal with this is to have one and print it on a side like so. 
+
+```{r}
+can <- cancer%>%
+  gather(clinic,count,3:4)%>%
+  ggplot(aes(ICD10Code,count,fill=clinic)) +
+    geom_col()+
+    labs(x="ICD10 Codes",y="Count",fill="Clinic",title="Select Cancers")+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+inf <- infectious%>%
+  gather(clinic,count,3:4)%>%
+  ggplot(aes(ICD10Code,count,fill=clinic)) +
+    geom_col()+
+  labs(x="ICD10 Codes",y="Count",fill="Clinic",title="Select Infectious Diseases")+
+  theme(legend.position="none",
+        axis.text.x = element_text(angle = 90, hjust = 1))
+
+grid.arrange(inf,can,ncol=2)
+```
+
+The issue here is that each plot is given equal space within the combined plot. However, because the cancer plot has the legend, the actual plot area is smaller than the infectious disease plot. `gglot2` allows for moving the legend to the bottom but then it will be off-center. The answer is, yet again, another package.
+
+```{r}
+library(ggpubr)
+
+inf <- inf + theme(legend.position="right")
+
+(plots <- ggarrange(inf, can, ncol=2, common.legend=T,legend="bottom"))
+```
+
+## Adding text arguments
+
+```{r}
+annotate_figure(plots,top=text_grob("Cases by Clinic and Disease Category",
+                                    size=16,face="bold"))
+```
