@@ -2,8 +2,8 @@
 title: "Plotting Confidence Intervals with ggplot2"
 author: "Gabby Novak"
 date: '2019-01-14'
-tags: ggplot2
-categories: Graphics
+tags: ["ggplot2"]
+categories: ["Graphics"]
 ---
 
 ```{r setup, include=F}
