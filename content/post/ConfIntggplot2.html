@@ -1,0 +1,155 @@
+---
+title: "Plotting Confidence Intervals with ggplot2"
+author: "Gabby Novak"
+date: '2019-01-14'
+tags: ggplot2
+categories: Graphics
+---
+
+
+
+<p>Whether or not you subscribe to a school of statistics which finds confidence intervals an appropriate basis for statistical conclusions, you must admit that they can be a useful tool. Confidence intervals essentially describe, given an estimate calculated from a sample, the range of values that estimate might reasonably take within the population. For example, if found the average height of a sample of high school males, the confidence interval would tell you, with a specified degree of certainty, what you might expect the average height of all high school males to be. A confidence interval is centered on the value calculated from the data, called the point estimate, and has a margin of error on either side. The degree of certainty you would like determines how wide this margin is. The more certainty, the wider the interval because to be more sure the true value is in the interval, the interval must include more values. If you want less strict certainty, the interval will narrow.</p>
+<p>So why might you want to plot them, do you ask? Because, looking at tables of numbers is not always the most insightful way to compare data. By graphing confidence intervals, it is very clear to see if/where they overlap which can be helpful in visualizing comparisons between groups.</p>
+<p>To demonstrate how to plot these intervals, I will be working with the <code>mpg</code> data set which is housed in ggplot2. <code>mpg</code> contains 11 variables related to fuel economy on 38 models of car. All together, there are 234 observations. For more information on the variables and data source, type <code>?mpg</code> into the console to open the help documentation.</p>
+<div id="basic-graphic" class="section level1">
+<h1>Basic graphic</h1>
+<div id="formatting-the-data" class="section level2">
+<h2>Formatting the data</h2>
+<p>Straight out of the box, <code>mpg</code> is pretty simple.</p>
+<pre class="r"><code>head(mpg)
+## # A tibble: 6 x 11
+##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
+##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 audi         a4      1.8  1999     4 auto(~ f        18    29 p     comp~
+## 2 audi         a4      1.8  1999     4 manua~ f        21    29 p     comp~
+## 3 audi         a4      2    2008     4 manua~ f        20    31 p     comp~
+## 4 audi         a4      2    2008     4 auto(~ f        21    30 p     comp~
+## 5 audi         a4      2.8  1999     6 auto(~ f        16    26 p     comp~
+## 6 audi         a4      2.8  1999     6 manua~ f        18    26 p     comp~</code></pre>
+<div id="using-t.test" class="section level3">
+<h3>Using <code>t.test()</code></h3>
+<p><strong>Note that while means are distributed in the t-distribution, other statistics may use other distributions.</strong></p>
+<p>By default, <code>t.test()</code> computes a 95% confidence interval. The adjust this, add a <code>conf.level</code> argument (in the form of a decimal) to the call.</p>
+<pre class="r"><code>(data &lt;- mpg %&gt;%
+  group_by(class) %&gt;%
+  summarize(point = t.test(hwy)$estimate,
+            lower = t.test(hwy)$conf.int[1],
+            upper = t.test(hwy)$conf.int[2])) 
+## # A tibble: 7 x 4
+##   class      point lower upper
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2seater     24.8  23.2  26.4
+## 2 compact     28.3  27.2  29.4
+## 3 midsize     27.3  26.6  28.0
+## 4 minivan     22.4  21.0  23.7
+## 5 pickup      16.9  16.1  17.7
+## 6 subcompact  28.1  26.3  30.0
+## 7 suv         18.1  17.4  18.9</code></pre>
+<p>Our variables are as follows:</p>
+<ul>
+<li><code>class</code>: the type of vehicle, in this case the grouping variable</li>
+<li><code>point</code>: a point estimate for the average highway mpg</li>
+<li><code>lower</code>: the lower bound of a 95% confidence interval on that point estimate</li>
+<li><code>upper</code>: the upper bound of a 95% confidence interval on that point estimate</li>
+</ul>
+</div>
+<div id="by-calculation" class="section level3">
+<h3>By calculation</h3>
+<p>Depending on how complicated your data is, you may have a non-standard standard error. This is especially common with weighted data sets. In this case, <code>t.test()</code> may not be able to produce an accurate figure. You will have to do a bit of calculating on your own. For the purposes of this demonstration, I will be using the usual standard error for means <span class="math inline">\(\left(\frac{\sigma}{\sqrt{n}}\right)\)</span>, so the results match those of <code>t.test()</code>, just to show you how to do it. However, if you need to use this method in reality, your results will not match.</p>
+<pre class="r"><code>mpg %&gt;%
+  group_by(class) %&gt;%
+  summarize(point = mean(hwy),  # if missingness, add na.rm = T
+            se = sd(hwy) / sqrt(n()),  # n() is an argumentless function that returns a count
+            m = se * qt(0.975, n()-1),
+            lower = point - m,
+            upper = point + m)
+## # A tibble: 7 x 6
+##   class      point    se     m lower upper
+##   &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 2seater     24.8 0.583 1.62   23.2  26.4
+## 2 compact     28.3 0.552 1.11   27.2  29.4
+## 3 midsize     27.3 0.334 0.674  26.6  28.0
+## 4 minivan     22.4 0.622 1.39   21.0  23.7
+## 5 pickup      16.9 0.396 0.806  16.1  17.7
+## 6 subcompact  28.1 0.909 1.85   26.3  30.0
+## 7 suv         18.1 0.378 0.756  17.4  18.9</code></pre>
+<p>Variables here are slightly different:</p>
+<ul>
+<li><code>class</code>: same as before</li>
+<li><code>point</code>: also the same but calculated directly</li>
+<li><code>se</code>: in this case calculated in the traditional manner but would be replaced with whatever your data demanded</li>
+<li><code>m</code>: the margin of error calculated by multiplying the standard error by a critical value. The syntax for <code>qt()</code> is <code>qt(percentile, degrees of freedom)</code>. The percentile used above (0.975) corresponds to a 2-sided, 95% confidence interval (because the leftover 5% of data is split between the upper and lower sides of the distribution). Those of you with more statistical knowledge may recognize that as the distribution is symmetric, <code>qt(0.975)</code> and <code>qt(0.025)</code> yield inverse results. I recommend using the upper-tail percentile (the larger number) as it gives a positive critical value and ensure that the bounds are in the correct order. Degrees of freedom for a single mean is <span class="math inline">\(n-1\)</span>. Once again this is dependent on the statistic you are working with.</li>
+<li><code>lower</code>: same as before</li>
+<li><code>upper</code>: also the same</li>
+</ul>
+</div>
+</div>
+<div id="plotting-the-intervals" class="section level2">
+<h2>Plotting the intervals</h2>
+<pre class="r"><code>(plt &lt;- ggplot(data) +
+  # plots the estimates, the midpoint of the interval
+  geom_point(aes(x = class, y = point)) + 
+  # plots the &quot;whiskers&quot;
+  geom_errorbar(aes(x = class,
+                    ymax = upper,  # upper bound of interval
+                    ymin = lower)) +  # lower bound of interval
+  # cosmetic adjustments
+  labs(y = &quot;highway mpg&quot;,
+       title = &quot;comparison of 95% confidence \n intervals on the mean&quot;,
+       caption = &quot;Source: ggplot::mpg&quot;) + 
+  theme(plot.title = element_text(hjust = 0.5)))  # center plot title</code></pre>
+<p><img src="/post/ConfIntggplot2_files/figure-html/unnamed-chunk-4-1.png" width="408" style="display: block; margin: auto;" /></p>
+<p>You may find it easier to make comparisons if the intervals were stacked vertically, in this case, merely invert the coordinate system.</p>
+<pre class="r"><code>plt + coord_flip()</code></pre>
+<p><img src="/post/ConfIntggplot2_files/figure-html/unnamed-chunk-5-1.png" width="336" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="with-faceting" class="section level1">
+<h1>With faceting</h1>
+<div id="single-panel" class="section level2">
+<h2>Single panel</h2>
+<pre class="r"><code># Preparing data
+mpg %&gt;%
+  mutate(trans = ifelse(str_detect(trans, &quot;auto&quot;), &quot;auto&quot;, &quot;manual&quot;)) %&gt;%  # group transmission types
+  group_by(class, trans) %&gt;%
+  summarize(point = t.test(hwy)$estimate,
+            lower = t.test(hwy)$conf.int[1],
+            upper = t.test(hwy)$conf.int[2]) %&gt;%
+# Plotting
+  ggplot() +
+    geom_point(aes(x = class, y = point, color = trans), alpha = 0.5) +  # alpha adjusts opacity
+    geom_errorbar(aes(x = class,
+                      ymax = upper,
+                      ymin = lower,
+                      color = trans), alpha = 0.5) +
+    coord_flip() +
+    labs(y = &quot;highway mpg&quot;,
+         title = &quot;comparison of 95% confidence \n intervals on the mean&quot;,
+         caption = &quot;Source: ggplot::mpg&quot;,
+         color = &quot;transmission \n type&quot;) + 
+    theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="/post/ConfIntggplot2_files/figure-html/unnamed-chunk-6-1.png" width="456" style="display: block; margin: auto;" /></p>
+</div>
+<div id="multi-panel" class="section level2">
+<h2>Multi-panel</h2>
+<pre class="r"><code># Preparing data
+mpg %&gt;%
+  group_by(class, year) %&gt;%
+  summarize(point = t.test(hwy)$estimate,
+            lower = t.test(hwy)$conf.int[1],
+            upper = t.test(hwy)$conf.int[2]) %&gt;%
+# Plotting
+  ggplot() +
+    geom_point(aes(x = class, y = point)) + 
+    geom_errorbar(aes(x = class,
+                      ymax = upper,
+                      ymin = lower)) +
+    facet_wrap(~year) +
+    coord_flip() +
+    labs(y = &quot;highway mpg&quot;,
+         title = &quot;comparison of 95% confidence intervals on the mean&quot;,
+         caption = &quot;Source: ggplot::mpg&quot;) + 
+    theme(plot.title = element_text(hjust = 0.5))</code></pre>
+<p><img src="/post/ConfIntggplot2_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
