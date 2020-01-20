@@ -1,10 +1,10 @@
 ---
-title: "YAML Headers Like You Mean It"
+title: "YAML Headers Like You Mean It: PDF Edition"
 author: "Gabby Novak"
-date: '2019-09-02'
+date: '2020-01-19'
 draft: yes
-tags: RMarkdown
-categories: []
+tags: ["YAML"]
+categories: ["RMarkdown"]
 ---
 
 ```{r setup, include=FALSE}
@@ -18,18 +18,11 @@ knitr::opts_chunk$set(collapse = TRUE,
 dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt"
 ```
 
-The YAML (YAML Ain't Markup Language) header is the sections at the beginning of each `.Rmd` file that controls the configuration of the entire document. When a new `.Rmd` is created in RStudio, the defaul YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box. 
+# The Defualt
 
-```
----
-title: "Title"
-author: "Author"
-date: "9/2/2019"
-output: html_document
----
-```
+The YAML (YAML Ain't Markup Language) header is the sections at the beginning of each `.Rmd` file that controls the configuration of the entire document. Here we will discuss the YAML options in PDF output. Note that there are additional arguments that can be used when other templates are defined.Those are a conversation for another time.
 
-![Base HTML](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/BaseHTML.png)
+When a new `.Rmd` is created in RStudio, the defaul YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box. 
 
 ```
 ---
@@ -41,7 +34,7 @@ output: pdf_document
 ```
 ![Base PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/BasePDF.png)
 
-Note that when you select a new output format to knit to through the knit button in the interface, it is automatically added to the YAML header. For example, if I were to knit the previous document to pdf, the YAML would automagically read this. Listing additional output options doesn't change the printed output of each output format. 
+Note that when you select a new output format to knit to through the knit button in the interface, it is automatically added to the YAML header. For example, if I were to knit the previous document to html, the YAML would automagically read this. Listing additional output options doesn't change the printed output of each output format. 
 
 ```
 ---
@@ -53,5 +46,130 @@ output:
   html_document: default
 ---
 ```
+# Top-Level Fields
 
+Top-level fields are defined for all output types. Without additional definition, a subtitle, multiple authors (they will be spaced appropriately; alternative syntax is `author: ["Author 1", "Author 2", "Author 3"]`), and an abstract.
 
+```
+---
+title: "Title"
+subtitle: "Subtitle"
+author: 
+  - "Author 1"
+  - "Author 2"
+  - "Author 3"
+date: "Date"
+abstract: |
+  Here you would put your abstract. This is a brief description of the basis of your work and its conclusions.
+  
+  It can have multiple paragraphs but they must be indented properly in the YAML.
+output: pdf_document
+---
+```
+![Titling PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/TitlingPDF.png)
+
+# Table of Contents
+
+When adding tables of contents, they pull from the Markdown section headers. The `toc_depth:` arguement dictates which section depths are listed. In the example, this arguement is set to 2, meaning headings 1 and 2 are displayed, but lower ones are not.
+
+```
+---
+title: "Title"
+author: "Author"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 2
+---
+
+# Heading 1: A Section
+
+Lorem ipsum dolor sit amet, diam prompta numquam at sea, eius omnium ei vix. 
+
+## Heading 2: A Subsection
+
+Eos idque prompta eu, graeci perfecto est ut. 
+
+### Heading 3: A Subsubsection (if it's good enough for LaTeX, it's good enough for me)
+
+Et dolorum interpretaris sit, quo omnes quando at, alii facilis eos in.
+
+```
+![Table of Contents PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/TOCPDF.png)
+
+# Section Numbering
+
+By default, sections are not numbered. But if this argument is set to true, they are numbered sequentially. Lower-level sections are denoted by decimal points.
+
+```
+---
+title: "Title"
+author: "Author"
+output: 
+  pdf_document:
+    number_sections: true
+---
+
+# Heading 1
+
+Lorem ipsum dolor sit amet, diam prompta numquam at sea, eius omnium ei vix. 
+
+## Heading 2
+
+Eos idque prompta eu, graeci perfecto est ut. 
+
+### Heading 3
+
+Et dolorum interpretaris sit, quo omnes quando at, alii facilis eos in.
+
+## Heading 2
+
+At per assum lobortis.
+
+# Heading 1
+
+In ius albucius prodesset.
+```
+
+![Section Numbering PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/SectionNumberingPDF.png)
+
+# LaTeX Options
+
+There is a whole bunch of LaTeX options you can specify in a YAML and demoing all of them here would be unproductive. So, I will just mention ones I have found particularly useful. That said, if you need something else or are bored (and have no other hobbies but YAML options), check out the further reading section at the bottom. 
+
+## Adjusting Margins
+
+This is done with a geometry argument. For example:
+
+```
+output: pdf_document:
+geometry: margin = 1in
+```
+This will alter the margins all the way around. It can be replaced with `margin_left`, `margin_right`, `margin_top`, and/or `margin_bottom` commands for finer control. 
+
+## Adjusting Line Spacing
+
+The example below produces double spacing.
+
+```
+output: pdf_document:
+linestretch: 2
+```
+
+## Font Options
+
+The most basic font adjustment is size. This is done easily enough with the `fontsize` argument which controls the size for the body text. Most classes allow 10, 11, or 12 point font.
+
+```
+output: pdf_document:
+fontsize: 10pt
+```
+
+# Citations and Figure Lists
+
+If you want to have LaTeX manage your citations or list figures/tables for you, this information is entered into the YAML. However, the how-to with that particular task is a bit hefty so unfortunately it will be saved for another day. 
+
+# Further Reading
+
+* [YAML Fieldguide](https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html)
+* [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/pdf-document.html)
