@@ -31,7 +31,7 @@ date: "9/2/2019"
 output: pdf_document
 ---
 ```
-![Base PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/BasePDF.png)
+![PDF rendering with base options](/project/YAMLHeadersLikeYouMeanIt_files/BasePDF.PNG)
 
 Note that when you select a new output format to knit to through the knit button in the interface, it is automatically added to the YAML header. For example, if I were to knit the previous document to html, the YAML would automagically read this. Listing additional output options doesn't change the printed output of each output format. 
 
@@ -65,7 +65,7 @@ abstract: |
 output: pdf_document
 ---
 ```
-![Titling PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/TitlingPDF.png)
+![PDF rendering with additional top-level options](/project/YAMLHeadersLikeYouMeanIt_files/TitlingPDF.PNG)
 
 # Table of Contents
 
@@ -96,7 +96,8 @@ Eos idque prompta eu, graeci perfecto est ut.
 Et dolorum interpretaris sit, quo omnes quando at, alii facilis eos in.
 
 ```
-![Table of Contents PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/TOCPDF.png)
+
+![PDF rendering with table of contents](/project/YAMLHeadersLikeYouMeanIt_files/TOCPDF.PNG)
 
 # Section Numbering
 
@@ -132,7 +133,7 @@ At per assum lobortis.
 In ius albucius prodesset.
 ```
 
-![Section Numbering PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/SectionNumberingPDF.png)
+![PDF rendering with section numbering](/project/YAMLHeadersLikeYouMeanIt_files/SectionNumberingPDF.PNG)
 
 # LaTeX Options
 
@@ -155,8 +156,7 @@ header-includes:
 x &= -3 \text{ and } -1
 \end{align*}
 ```
-
-![amsmath](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/amsmathPDF.png)
+![PDF rendering using amsmath package](/project/YAMLHeadersLikeYouMeanIt_files/amsmathPDF.PNG)
 
 ## Indentation
 
@@ -214,7 +214,7 @@ header-includes:
 ---
 ```
 
-![Font PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/FontPDF.png)
+![PDF rendering using alternative font](/project/YAMLHeadersLikeYouMeanIt_files/FontPDF.PNG)
 
 # Citations and Figure Lists
 
