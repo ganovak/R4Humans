@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R for Rookies on R 4 Humans</title>
+    <link>/categories/r-for-rookies/</link>
+    <description>Recent content in R for Rookies on R 4 Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r-for-rookies/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Subsetting</title>
+      <link>/project/subsetting/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/subsetting/</guid>
+      <description>1 Dimensional ObjectsSubsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimensions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimensional objects are easily generalizable.</description>
+    </item>
+    
+  </channel>
+</rss>

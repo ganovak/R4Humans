@@ -6,10 +6,64 @@
     <description>Recent content in Tags on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>YAML</title>
+      <link>/tags/yaml/</link>
+      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/yaml/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>cowplot</title>
+      <link>/tags/cowplot/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/cowplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggpubr</title>
+      <link>/tags/ggpubr/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggpubr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gridExtra</title>
+      <link>/tags/gridextra/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gridextra/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Base R</title>
+      <link>/tags/base-r/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/base-r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LaTeX</title>
+      <link>/tags/latex/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/latex/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>ggplot2</title>
@@ -21,29 +75,11 @@
     </item>
     
     <item>
-      <title>Base R</title>
-      <link>/tags/base-r/</link>
-      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/base-r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Choropleths</title>
       <link>/tags/choropleths/</link>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/choropleths/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LaTeX</title>
-      <link>/tags/latex/</link>
-      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/latex/</guid>
       <description></description>
     </item>
     

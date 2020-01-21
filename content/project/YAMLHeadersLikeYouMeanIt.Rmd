@@ -1,8 +1,7 @@
 ---
 title: "YAML Headers Like You Mean It: PDF Edition"
 author: "Gabby Novak"
-date: '2020-01-19'
-draft: yes
+date: '2020-01-20'
 tags: ["YAML"]
 categories: ["RMarkdown"]
 ---
@@ -22,7 +21,7 @@ dir<-"C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt"
 
 The YAML (YAML Ain't Markup Language) header is the sections at the beginning of each `.Rmd` file that controls the configuration of the entire document. Here we will discuss the YAML options in PDF output. Note that there are additional arguments that can be used when other templates are defined.Those are a conversation for another time.
 
-When a new `.Rmd` is created in RStudio, the defaul YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box. 
+When a new `.Rmd` is created in RStudio, the default YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box. 
 
 ```
 ---
@@ -70,7 +69,9 @@ output: pdf_document
 
 # Table of Contents
 
-When adding tables of contents, they pull from the Markdown section headers. The `toc_depth:` arguement dictates which section depths are listed. In the example, this arguement is set to 2, meaning headings 1 and 2 are displayed, but lower ones are not.
+*Note: This is the part where you may start to use logical arguments in your YAML. In a YAML, `true`, `yes`, and `on` (and conversely `false`, `no`, and `off`) are equivalent and valid input for a logical argument. Additionally, quotation marks are not necessary for all alpha inputs but can be added to group things better.*
+
+When adding tables of contents, they pull from the Markdown section headers. The `toc_depth:` argument dictates which section depths are listed. In the example, this argument is set to 2, meaning headings 1 and 2 are displayed, but lower ones are not.
 
 ```
 ---
@@ -137,6 +138,35 @@ In ius albucius prodesset.
 
 There is a whole bunch of LaTeX options you can specify in a YAML and demoing all of them here would be unproductive. So, I will just mention ones I have found particularly useful. That said, if you need something else or are bored (and have no other hobbies but YAML options), check out the further reading section at the bottom. 
 
+## Using LaTeX Packages
+
+LaTeX has multitudes of extension packages that can be used to create any number of effects in the resulting documents. These may be useful to you. To see one example, check out [this post about PDF orientation](https://r4humans.netlify.com/2019/10/13/changing-pdf-orientation/). Another common package is amsmath, developed by the American Mathematical Society it includes a variety of symbols and equation formatting options not available in base LaTex. It's documentation is [here](http://texdoc.net/texmf-dist/doc/latex-dev/amsmath/amsldoc.pdf).
+
+```
+---
+output: 
+  pdf_document:
+header-includes:
+- \usepackage{amsmath}
+---
+\begin{align*}
+0 &= x^2+4x+3 \\
+&= (x+3)(x+1) \\
+x &= -3 \text{ and } -1
+\end{align*}
+```
+
+![amsmath](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/amsmathPDF.png)
+
+## Indentation
+
+The default LaTeX template used by RMarkdown when knitting to PDF puts spaces in between paragraph breaks. To use indentation instead, use
+
+```
+output: pdf_document:
+indent: true
+```
+
 ## Adjusting Margins
 
 This is done with a geometry argument. For example:
@@ -158,12 +188,33 @@ linestretch: 2
 
 ## Font Options
 
-The most basic font adjustment is size. This is done easily enough with the `fontsize` argument which controls the size for the body text. Most classes allow 10, 11, or 12 point font.
+### Font Size
+
+This is done easily enough with the `fontsize` argument which controls the size for the body text. Most classes allow 10, 11, or 12 point font.
 
 ```
 output: pdf_document:
 fontsize: 10pt
 ```
+
+### Font (using LaTeX font packages: one of many methods)
+
+There are a vast number of ways to change the font in LaTeX documents, however, they tend to fall into two basic categories: using fonts installed on your computer and downloading fonts from LaTex packages. Here I will demo the latter since it tends to be the less complicated option for most applications. The default LaTeX font is Latin Modern, it is a basic serif font appropriate for most official reports and documents. However, should you need to change it a variety of alternatives are available. Do keep in mind, not all alternatives are suitable for math typesetting so if that is something you will need make sure to double check that it supports math characters. Go [here](https://tug.org/FontCatalogue) to view an extensive catalog of LaTeX fonts. The site divides fonts into several categories and displays samples of each. Click on a font to view its full page. Each has a usage section which dictates the code to use to implement that font. For example, if I were to want my document printed in Computer Modern Typewriter Proportional, a font in the typewriter category, I would use the following YAML:
+
+```
+---
+title: "Title"
+author: "Author"
+output: 
+  pdf_document:
+header-includes:
+- \renewcommand*\ttdefault{cmvtt}
+- \renewcommand*\familydefault{\ttdefault}
+- \usepackage[T1]{fontenc}
+---
+```
+
+![Font PDF](C:/Users/gabri/Documents/R/R4Humans-AuxFiles/YAMLHeadersLikeYouMeanIt/FontPDF.png)
 
 # Citations and Figure Lists
 

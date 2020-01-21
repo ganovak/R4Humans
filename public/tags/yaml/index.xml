@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>YAML on R 4 Humans</title>
+    <link>/tags/yaml/</link>
+    <description>Recent content in YAML on R 4 Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/yaml/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>YAML Headers Like You Mean It: PDF Edition</title>
+      <link>/project/yamlheaderslikeyoumeanit/</link>
+      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project/yamlheaderslikeyoumeanit/</guid>
+      <description>The DefualtThe YAML (YAML Ain’t Markup Language) header is the sections at the beginning of each .Rmd file that controls the configuration of the entire document. Here we will discuss the YAML options in PDF output. Note that there are additional arguments that can be used when other templates are defined.Those are a conversation for another time.
+When a new .Rmd is created in RStudio, the default YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box.</description>
+    </item>
+    
+  </channel>
+</rss>

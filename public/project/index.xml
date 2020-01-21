@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Learning on R 4 Humans</title>
+    <title>Projects on R 4 Humans</title>
     <link>/project/</link>
     <description>Recent content in Projects on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>YAML Headers Like You Mean It: PDF Edition</title>
+      <link>/project/yamlheaderslikeyoumeanit/</link>
+      <pubDate>Mon, 20 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project/yamlheaderslikeyoumeanit/</guid>
+      <description>The DefualtThe YAML (YAML Ain’t Markup Language) header is the sections at the beginning of each .Rmd file that controls the configuration of the entire document. Here we will discuss the YAML options in PDF output. Note that there are additional arguments that can be used when other templates are defined.Those are a conversation for another time.
+When a new .Rmd is created in RStudio, the default YAML looks like this, where the title, author, and output sections are filled based on the selections made in the dialog box.</description>
+    </item>
+    
+    <item>
+      <title>Multi-Plot Formatting</title>
+      <link>/project/multiplotformatting/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/multiplotformatting/</guid>
+      <description>Adding one plot to a report is not hard. The difficulty comes when two or more plots are required to be arranged in some sort of grid (this includes just two graphs side by side). There are several options for how this is accomplished based on what specific arguments are needed.
+Data PreparationExample data used in demonstration available here
+#### Packages ####library(tidyverse)#### Data Read In ####diseases &amp;lt;- read.</description>
+    </item>
+    
+    <item>
+      <title>Subsetting</title>
+      <link>/project/subsetting/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/subsetting/</guid>
+      <description>1 Dimensional ObjectsSubsetting is simply the act of taking an object and extracting elements from it in some controlled manner. If the subset is assigned to a variable then it can be used just as the original object was. Here we will discuss subsetting in 1 and 2 dimensions (vectors and data frames). Although higher dimension objects do exist in R, the methods for 2 dimensional objects are easily generalizable.</description>
+    </item>
     
     <item>
       <title>Complete Guide to ggplot2 Geoms</title>
@@ -18,47 +48,7 @@
       
       <guid>/project/completeguidetogeoms/</guid>
       <description>ggplot graphics are built by what are called geoms. These basically determine that type of graph that will be produced. Several geoms can be layered into a single graphic, each using different data if necessary. This will be a basic run down of the availible geoms and their common uses.
-Reference Lines
-
-
-Geom
-
-Data
-
-Purpose
-
-
-
-
-
-geom_abline()
-
-slope; intercept
-
-Diagonal reference line
-
-
-
-geom_hline()
-
-yintercept
-
-Horizontal reference line
-
-
-
-geom_vline()
-
-xintercept
-
-Vertical reference line
-
-
-
-
-
-Bar Charts
-Coming soon</description>
+Reference LinesGeomDataPurposegeom_abline()slope; interceptDiagonal reference linegeom_hline()yinterceptHorizontal reference linegeom_vline()xinterceptVertical reference lineBar ChartsComing soon</description>
     </item>
     
     <item>
@@ -67,21 +57,8 @@ Coming soon</description>
       <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/project/mappingwithggplot2/</guid>
-      <description>Reading in Spatial Objects
-From tigiris files
-There are many packages that make sourcing shp files easier. We will focus on the tigris package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.
-library(tigris)
-tig&amp;lt;-states(year = 2017)
-head(tig@data)
-## REGION DIVISION STATEFP STATENS GEOID STUSPS NAME LSAD MTFCC
-## 0 3 5 54 01779805 54 WV West Virginia 00 G4000
-## 1 3 5 12 00294478 12 FL Florida 00 G4000
-## 2 2 3 17 01779784 17 IL Illinois 00 G4000
-## 3 2 4 27 00662849 27 MN Minnesota 00 G4000
-## 4 3 5 24 01714934 24 MD Maryland 00 G4000
-## 5 1 1 44 01219835 44 RI Rhode Island 00 G4000
-## FUNCSTAT ALAND AWATER INTPTLAT INTPTLON
-## 0 A 62265662566 489840834 +38.</description>
+      <description>Reading in Spatial ObjectsFrom tigris filesThere are many packages that make sourcing shp files easier. We will focus on the tigris package which downloads a variety of files directly from the US Census Bureau. The package contains functions for downloading many different geographies, in this case we will use a state map.
+library(tigris)tig&amp;lt;-states(year = 2017)head(tig@data)## REGION DIVISION STATEFP STATENS GEOID STUSPS NAME LSAD MTFCC## 0 3 5 54 01779805 54 WV West Virginia 00 G4000## 1 3 5 12 00294478 12 FL Florida 00 G4000## 2 2 3 17 01779784 17 IL Illinois 00 G4000## 3 2 4 27 00662849 27 MN Minnesota 00 G4000## 4 3 5 24 01714934 24 MD Maryland 00 G4000## 5 1 1 44 01219835 44 RI Rhode Island 00 G4000## FUNCSTAT ALAND AWATER INTPTLAT INTPTLON## 0 A 62265662566 489840834 +38.</description>
     </item>
     
   </channel>

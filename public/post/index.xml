@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Quick Learning on R 4 Humans</title>
+    <title>Posts on R 4 Humans</title>
     <link>/post/</link>
     <description>Recent content in Posts on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Changing PDF Orientation</title>
+      <link>/2019/10/13/changing-pdf-orientation/</link>
+      <pubDate>Sun, 13 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/13/changing-pdf-orientation/</guid>
+      <description>Changing the orientation for the whole documentPDFs knit in a portrait orientation by default. However, should you want to output a PDF in landscape mode, it has to be specified in the LaTeX arguments in the YAML header.
+---title: &amp;quot;Landscape PDF&amp;quot;subtitle: &amp;quot;This demonstrates a landscape PDF output&amp;quot;output: pdf_documentclassoption: landscape---This document is 8.5 inches tall and 11 inches wide.** The code above produces this output**</description>
+    </item>
     
     <item>
       <title>Multi-Line Text in ggplot2 Graphics</title>
@@ -18,19 +28,7 @@
       
       <guid>/2019/08/14/multi-line-text-in-ggplot2-graphics/</guid>
       <description>In terms of labeling, ggplot2 provides a lot of options. However, the default is to put this text in a single line, regardless of length. This can do real strange things to spacing within the figure. Shortening labels is not always an option, so here we will explore the available labels for ggplot figures and how to force multi-lines.
-Available labels
-# simulating data
-set.seed(08142019)
-data&amp;lt;-data.frame(x=sample(1:100,100),
-y=sample(1:100,100),
-cat1=sample(c(&amp;quot;group 1&amp;quot;,&amp;quot;group 2&amp;quot;),100,replace=T),
-cat2=sample(c(&amp;quot;type 1&amp;quot;,&amp;quot;type 2&amp;quot;),100,replace=T))
-# plot without label specifcation
-library(ggplot2)
-plot1&amp;lt;-ggplot(data,aes(x,y,shape=cat1,color=cat2))+
-geom_point()
-plot1
-If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends.</description>
+Available labels# simulating dataset.seed(08142019)data&amp;lt;-data.frame(x=sample(1:100,100),y=sample(1:100,100),cat1=sample(c(&amp;quot;group 1&amp;quot;,&amp;quot;group 2&amp;quot;),100,replace=T),cat2=sample(c(&amp;quot;type 1&amp;quot;,&amp;quot;type 2&amp;quot;),100,replace=T))# plot without label specifcationlibrary(ggplot2)plot1&amp;lt;-ggplot(data,aes(x,y,shape=cat1,color=cat2))+geom_point()plot1If labels are not explicitly entered, ggplot defaults to using variable names for axes and legends.</description>
     </item>
     
     <item>
@@ -40,6 +38,15 @@ If labels are not explicitly entered, ggplot defaults to using variable names fo
       
       <guid>/2019/08/09/using-latex-font-in-graphics/</guid>
       <description>When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don’t match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by ggplot::theme(text=element_text(family=&#34;serif&#34;)). If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font.</description>
+    </item>
+    
+    <item>
+      <title>Plotting Confidence Intervals with ggplot2</title>
+      <link>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</link>
+      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</guid>
+      <description>Whether or not you subscribe to a school of statistics which finds confidence intervals an appropriate basis for statistical conclusions, you must admit that they can be a useful tool. Confidence intervals essentially describe, given an estimate calculated from a sample, the range of values that estimate might reasonably take within the population. For example, if found the average height of a sample of high school males, the confidence interval would tell you, with a specified degree of certainty, what you might expect the average height of all high school males to be.</description>
     </item>
     
   </channel>

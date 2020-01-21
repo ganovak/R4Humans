@@ -6,10 +6,21 @@
     <description>Recent content in Graphics on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 14 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/graphics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Multi-Plot Formatting</title>
+      <link>/project/multiplotformatting/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/multiplotformatting/</guid>
+      <description>Adding one plot to a report is not hard. The difficulty comes when two or more plots are required to be arranged in some sort of grid (this includes just two graphs side by side). There are several options for how this is accomplished based on what specific arguments are needed.
+Data PreparationExample data used in demonstration available here
+#### Packages ####library(tidyverse)#### Data Read In ####diseases &amp;lt;- read.</description>
+    </item>
     
     <item>
       <title>Complete Guide to ggplot2 Geoms</title>
@@ -38,6 +49,15 @@ Available labels# simulating dataset.seed(08142019)data&amp;lt;-data.frame(x=
       
       <guid>/2019/08/09/using-latex-font-in-graphics/</guid>
       <description>When creating graphics to insert into reports, either directly through RMarkdown or with an exported image file, it can be annoying when the font used in the text and the graphic don’t match. LaTex uses Computer Modern as its default font, this is a serif font but slightly different from the Times New Roman used by ggplot::theme(text=element_text(family=&#34;serif&#34;)). If no font family is provided, ggplot uses Ariel as a default. R base graphics similarly use a san-serif font.</description>
+    </item>
+    
+    <item>
+      <title>Plotting Confidence Intervals with ggplot2</title>
+      <link>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</link>
+      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</guid>
+      <description>Whether or not you subscribe to a school of statistics which finds confidence intervals an appropriate basis for statistical conclusions, you must admit that they can be a useful tool. Confidence intervals essentially describe, given an estimate calculated from a sample, the range of values that estimate might reasonably take within the population. For example, if found the average height of a sample of high school males, the confidence interval would tell you, with a specified degree of certainty, what you might expect the average height of all high school males to be.</description>
     </item>
     
   </channel>

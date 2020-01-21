@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggpubr on R 4 Humans</title>
+    <link>/tags/ggpubr/</link>
+    <description>Recent content in ggpubr on R 4 Humans</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 21 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/ggpubr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Multi-Plot Formatting</title>
+      <link>/project/multiplotformatting/</link>
+      <pubDate>Mon, 21 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/multiplotformatting/</guid>
+      <description>Adding one plot to a report is not hard. The difficulty comes when two or more plots are required to be arranged in some sort of grid (this includes just two graphs side by side). There are several options for how this is accomplished based on what specific arguments are needed.
+Data PreparationExample data used in demonstration available here
+#### Packages ####library(tidyverse)#### Data Read In ####diseases &amp;lt;- read.</description>
+    </item>
+    
+  </channel>
+</rss>
