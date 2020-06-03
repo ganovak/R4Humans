@@ -17,4 +17,6 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.align="center")
 ```
 
-![](https://youtu.be/8RAO_ZrbKEE)
+```{r video, echo = F}
+blogdown::shortcode("youtube", "8RAO_ZrbKEE")
+```
