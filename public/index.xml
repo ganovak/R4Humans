@@ -6,10 +6,19 @@
     <description>Recent content on R 4 Humans</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Version Control with GitHub</title>
+      <link>/project/versioncontrol/</link>
+      <pubDate>Wed, 03 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/project/versioncontrol/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>YAML Headers Like You Mean It: PDF Edition</title>
@@ -97,15 +106,6 @@ library(tigris)tig&amp;lt;-states(year = 2017)head(tig@data)## REGION DIVISIO
       
       <guid>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</guid>
       <description>Whether or not you subscribe to a school of statistics which finds confidence intervals an appropriate basis for statistical conclusions, you must admit that they can be a useful tool. Confidence intervals essentially describe, given an estimate calculated from a sample, the range of values that estimate might reasonably take within the population. For example, if found the average height of a sample of high school males, the confidence interval would tell you, with a specified degree of certainty, what you might expect the average height of all high school males to be.</description>
-    </item>
-    
-    <item>
-      <title>Using Version Control with GitHub</title>
-      <link>/project/versioncontrol/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/project/versioncontrol/</guid>
-      <description></description>
     </item>
     
   </channel>
