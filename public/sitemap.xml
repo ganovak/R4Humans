@@ -1,41 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>/categories/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/rmarkdown/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/yaml/</loc>
     <lastmod>2020-01-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -44,9 +38,23 @@
   </url>
   
   <url>
+    <loc>/tags/cowplot/</loc>
+    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ggpubr/</loc>
+    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/graphics/</loc>
     <lastmod>2019-10-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/gridextra/</loc>
+    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -55,27 +63,8 @@
   </url>
   
   <url>
-    <loc>/tags/cowplot/</loc>
-    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/ggpubr/</loc>
-    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/gridextra/</loc>
-    <lastmod>2019-10-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/base-r/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -86,25 +75,21 @@
   <url>
     <loc>/tags/latex/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/pdfs/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r-for-rookies/</loc>
     <lastmod>2019-10-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -118,30 +103,32 @@
   </url>
   
   <url>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/08/14/multi-line-text-in-ggplot2-graphics/</loc>
     <lastmod>2019-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/ggplot2/</loc>
-    <lastmod>2019-08-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/choropleths/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/mapping/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/mappingwithggplot2/</loc>
+    <lastmod>2019-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tigris/</loc>
     <lastmod>2019-08-09T00:00:00+00:00</lastmod>
   </url>
   
@@ -151,14 +138,28 @@
   </url>
   
   <url>
-    <loc>/tags/tigris/</loc>
-    <lastmod>2019-08-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</loc>
+    <lastmod>2019-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/2019/01/14/plotting-confidence-intervals-with-ggplot2/</loc>
-    <lastmod>2019-01-14T00:00:00+00:00</lastmod>
+    <loc>/tags/github/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/platform-integration/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/rstudio/</loc>
+  </url>
+  
+  <url>
+    <loc>/project/versioncontrol/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/version-control/</loc>
   </url>
   
 </urlset>

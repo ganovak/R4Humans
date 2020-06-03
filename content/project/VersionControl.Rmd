@@ -1,0 +1,18 @@
+---
+title: "Using Version Control with GitHub"
+author: "Gabby Novak"
+date: '2020-6-3'
+subtitle: "Initialization"
+tags: ["Version Control", "GitHub", "RStudio"]
+categories: ["Platform Integration"]
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(collapse = TRUE, 
+                      fig.height=5, 
+                      fig.width=5,
+                      message=F,
+                      warning=F,
+                      error=F,
+                      fig.align="center")
+```
